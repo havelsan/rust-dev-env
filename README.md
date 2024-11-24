@@ -17,7 +17,7 @@ This repository contains rust development environment preparation scripts and do
 
 
 ## Preparing Rust SDK Directory
-Preparing Local Registry , Alfa, Test, Product, ThirdParty
+Downloading rust binary and preparing sdk directory
 
 ## Preparing Local Registry
 Preparing Local Registry , Alfa, Test, Product, ThirdParty
