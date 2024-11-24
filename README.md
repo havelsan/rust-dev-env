@@ -3,17 +3,21 @@ This repository contains rust development environment preparation scripts and do
 
 ## Table of Contents
 
-1. [Preparing Local Registry](#preparing-local-registry)
-2. [Updating Local Registry](#updating-local-registry)
-3. [Preparing Local Code Repository](#preparing-local-code-repository)
-4. [Preparing Local Package Repository](#preparing-local-package-repository)
-5. [Preparing Runtime Environment](#preparing-runtime-environment)
-6. [Preparing Runtime Environment Monitoring Tools Installation and Usage Examples](#Preparing-Runtime-Environment-Monitoring-Tools-Installation-and-Usage-Examples)
-7. [Debugging Tools Installation and Usage Examples](#Debugging-Tools-Installation-and-Usage-Examples)
-8. [Rust Project Templates](#Rust-Project-Templates)
-9. [Architecture Templates](#Architecture-Templates)
+1. [Preparing Rust SDK Directory](#preparing-rust-sdk-directory)
+2. [Preparing Local Registry](#preparing-local-registry)
+3. [Updating Local Registry](#updating-local-registry)
+4. [Preparing Local Code Repository](#preparing-local-code-repository)
+5. [Preparing Local Package Repository](#preparing-local-package-repository)
+6. [Preparing Runtime Environment](#preparing-runtime-environment)
+7. [Preparing Runtime Environment Monitoring Tools Installation and Usage Examples](#Preparing-Runtime-Environment-Monitoring-Tools-Installation-and-Usage-Examples)
+8. [Debugging Tools Installation and Usage Examples](#Debugging-Tools-Installation-and-Usage-Examples)
+9. [Rust Project Templates](#Rust-Project-Templates)
+10. [Architecture Templates](#Architecture-Templates)
 9. [CI/CD](#ci-cd)
 
+
+## Preparing Rust SDK Directory
+Preparing Local Registry , Alfa, Test, Product, ThirdParty
 
 ## Preparing Local Registry
 Preparing Local Registry , Alfa, Test, Product, ThirdParty
