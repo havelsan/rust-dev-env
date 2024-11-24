@@ -7,8 +7,8 @@ This repository contains rust development environment preparation scripts and do
 2. [Updating Local Registry](#updating-local-registry)
 3. [Preparing Local Code Repository](#preparing-local-code-repository)
 4. [Preparing Local Package Repository](#preparing-local-package-repository)
-5. [Preparing Runtime Server Environment](#preparing-runtime-server-environment)
-6. [Preparing Runtime Server Environment Monitoring Tools Installation and Usage Examples](#Preparing-Runtime-Server-Environment-Monitoring-Tools-Installation-and-Usage-Examples)
+5. [Preparing Runtime Environment](#preparing-runtime-environment)
+6. [Preparing Runtime Environment Monitoring Tools Installation and Usage Examples](#Preparing-Runtime-Environment-Monitoring-Tools-Installation-and-Usage-Examples)
 7. [Debugging Tools Installation and Usage Examples](#Debugging-Tools-Installation-and-Usage-Examples)
 8. [Rust Project Templates](#Rust-Project-Templates)
 9. [Architecture Templates](#Architecture-Templates)
@@ -27,10 +27,10 @@ Preparing Local Code Repository (gitea)
 ## Preparing Local Package Repository
 Preparing Local Binary RPM/DEB Package Repository (webdav)
 
-## Preparing Runtime Server Environment
+## Preparing Runtime Environment
 Redis, Aerospike, Nginx, FastDDS, RustDDS, Log Server and configuring other servers to redirect their logs to  this server.
 
-## Preparing Runtime Server Environment Monitoring Tools Installation and Usage Examples
+## Preparing Runtime Environment Monitoring Tools Installation and Usage Examples
 P3X Redis UI, Clairvoyance for Aerospike, Nginx, Fast DDS Monitor, Wireshark, Log Server ELK-Graphana
 
 ## Debugging and Test Tools Installation and Usage Examples
