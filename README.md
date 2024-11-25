@@ -3,7 +3,7 @@ This repository contains rust development environment preparation scripts and do
 
 ## Table of Contents
 
-1. [Preparing Rust SDK Directory](#preparing-rust-sdk-directory)
+1. [Preparing Rust SDK Directory](doc/01.preparing-rust-sdk-directory/)
 2. [Preparing Local Registry](#preparing-local-registry)
 3. [Updating Local Registry](#updating-local-registry)
 4. [Preparing Local Code Repository](#preparing-local-code-repository)
