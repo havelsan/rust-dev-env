@@ -15,10 +15,11 @@ cd $HOME/tmp
 rm -Rf $RUST_VERSION*
 
 wget --no-check-certificate https://static.rust-lang.org/dist/$RUST_VERSION.tar.xz
-mkdir -p $HOME/sdk/
+mkdir -p $HOME/sdk/tools
+mkdir -p $HOME/sdk/infra/1.0.0/
 tar xvf $RUST_VERSION.tar.xz
 cd $RUST_VERSION
-./install.sh --prefix=$HOME/sdk/$RUST_VERSION
+./install.sh --prefix=$HOME/sdk/infra/1.0.0/$RUST_VERSION
 
 echo '#!/bin/bash
 export RUST_HOME=`cd \`dirname $( readlink -f $BASH_SOURCE ) \` && pwd`
@@ -27,20 +28,33 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$RUST_HOME/lib
 export CARGO_HTTP_CHECK_REVOKE=false
 WHICH_RUSTC=$(which rustc)
 RUSTC_VERSION=$(rustc --version)
-echo ">>> $RUST_HOME ###  $WHICH_RUSTC ### $RUSTC_VERSION"
-'  > $HOME/sdk/$RUST_VERSION/release
+echo ">>> RUST_HOME=$RUST_HOME "
+'  > $HOME/sdk/infra/1.0.0/$RUST_VERSION/release
 
 echo '#!/bin/bash
-export SDK_DIR=`cd \`dirname $( readlink -f $BASH_SOURCE ) \` && pwd`
-
-for i in $SDK_DIR/*
+export SDK_INFRA_DIR=`cd \`dirname $( readlink -f $BASH_SOURCE ) \` && pwd`
+export SDK_VERSION=$(echo $SDK_INFRA_DIR| sed -e "s#.*/sdk/infra/##")
+for i in $SDK_INFRA_DIR/*
 do
 	if [ -e $i/release ]
 	then
 		. $i/release
 	fi
 done
-' > $HOME/sdk/release
+' > $HOME/sdk/infra/1.0.0/release
+
+
+echo '#!/bin/bash
+export SDK_TOOLS_DIR=`cd \`dirname $( readlink -f $BASH_SOURCE ) \` && pwd`
+
+for i in $SDK_TOOLS_DIR/*
+do
+	if [ -e $i/release ]
+	then
+		. $i/release
+	fi
+done
+' > $HOME/sdk/tools/release
 
 
 

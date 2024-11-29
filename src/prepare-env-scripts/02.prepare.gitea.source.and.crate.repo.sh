@@ -1,0 +1,63 @@
+
+if [ $# -lt 3 ]
+then
+  GITEA_VERSION=1.22.4
+  GITEA_OS_ARCH=linux-amd64
+  GITEA_APP_INI_FILE=./gitea.app.ini
+else
+  GITEA_VERSION=$1
+  GITEA_OS_ARCH=$2
+  GITEA_APP_INI_FILE=$3
+fi
+
+if [ ! -f $GITEA_APP_INI_FILE ]
+then
+   echo "please go into directory rust-dev-env/src/prepare-env-scripts"
+   echo "quiting..."
+   exit 1
+fi
+
+
+export GITEA_HOME=$HOME/sdk/tools/gitea-$GITEA_VERSION/
+mkdir -p $GITEA_HOME/custom/conf
+mkdir -p $GITEA_HOME/data/gitea-repositories
+mkdir -p $GITEA_HOME/data/lfs
+mkdir -p $GITEA_HOME/log
+
+cp ./gitea.app.ini $GITEA_HOME/custom/conf/app.ini
+perl -pi -e "s/GITEA_RUN_HOME/$USER/g" $GITEA_HOME/custom/conf/app.ini
+perl -pi -e "s/GITEA_HOME/$GITEA_HOME/g" $GITEA_HOME/custom/conf/app.ini
+ 
+mkdir -p $HOME/tmp
+cd $HOME/tmp
+wget --no-check-certificate https://dl.gitea.com/gitea/1.22.4/gitea-$GITEA_VERSION-$GITEA_OS_ARCH.xz
+xz -d -v gitea-$GITEA_VERSION-$GITEA_OS_ARCH.xz
+chmod +x gitea-$GITEA_VERSION-$GITEA_OS_ARCH
+
+
+
+
+mv gitea-$GITEA_VERSION-$GITEA_OS_ARCH $GITEA_HOME
+
+cd $GITEA_HOME
+
+ln -s gitea-$GITEA_VERSION-$GITEA_OS_ARCH gitea_executable
+
+echo '#!/bin/bash
+export GITEA_HOME=`cd \`dirname $( readlink -f $BASH_SOURCE ) \` && pwd`
+export PATH=$PATH:$GITEA_HOME/
+
+echo ">>> GITEA_HOME=$GITEA_HOME "
+'  >release
+
+echo '#!/bin/bash
+cd $GITEA_HOME
+./gitea_executable 
+' > run.sh
+chmod +x run.sh
+
+
+
+
+
+
