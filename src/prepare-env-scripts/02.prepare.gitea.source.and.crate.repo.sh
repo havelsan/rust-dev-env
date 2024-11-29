@@ -25,8 +25,10 @@ mkdir -p $GITEA_HOME/data/lfs
 mkdir -p $GITEA_HOME/log
 
 cp ./gitea.app.ini $GITEA_HOME/custom/conf/app.ini
-perl -pi -e "s/GITEA_RUN_HOME/$USER/g" $GITEA_HOME/custom/conf/app.ini
-perl -pi -e "s/GITEA_HOME/$GITEA_HOME/g" $GITEA_HOME/custom/conf/app.ini
+cp ./gitea.db $GITEA_HOME/data
+
+perl -pi -e "s/GITEA_RUN_USER/$USER/g" $GITEA_HOME/custom/conf/app.ini
+perl -pi -e "s#GITEA_HOME#$GITEA_HOME#g" $GITEA_HOME/custom/conf/app.ini
  
 mkdir -p $HOME/tmp
 cd $HOME/tmp
