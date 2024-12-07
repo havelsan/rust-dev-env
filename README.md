@@ -4,11 +4,11 @@ This repository contains rust development environment preparation scripts and do
 ## Table of Contents
 
 1. [Preparing Rust SDK Directory](doc/01.preparing-rust-sdk-directory/)
-2. [Preparing Gitea Source Code Repository and Local Crate Registry ](doc/02.preparing-local-source-code-repository-and-local-crate-registry/)  
-2. [Preparing Local Registry](#preparing-local-registry)
-3. [Updating Local Registry](#updating-local-registry)
-4. [Preparing Local Code Repository](#preparing-local-code-repository)
-5. [Preparing Local Package Repository](#preparing-local-package-repository)
+2. [Preparing Local Source Code Repository](doc/02.preparing-local-source-code-repository/)  
+2. [Preparing Local Crate Registry](doc/03.preparing-local-crate-registry/)
+3. [Updating Local Thirdparty Crate Registry](doc/04.updating-local-thirdparty-crate-registry/)
+4. [Preparing Local Package Repository](#preparing-local-code-repository)
+5. [Preparing Package Set Manager](#preparing-local-package-repository)
 6. [Preparing Runtime Environment](#preparing-runtime-environment)
 7. [Preparing Runtime Environment Monitoring Tools Installation and Usage Examples](#Preparing-Runtime-Environment-Monitoring-Tools-Installation-and-Usage-Examples)
 8. [Debugging Tools Installation and Usage Examples](#Debugging-Tools-Installation-and-Usage-Examples)
@@ -16,18 +16,6 @@ This repository contains rust development environment preparation scripts and do
 10. [Architecture Templates](#Architecture-Templates)
 9. [CI/CD](#ci-cd)
 
-
-## Preparing Rust SDK Directory
-Downloading rust binary and preparing sdk directory
-
-## Preparing Local Registry
-Preparing Local Registry , Alfa, Test, Product, ThirdParty
-
-## Updating Local Registry
-Updating Local Registry
-
-## Preparing Local Code Repository
-Preparing Local Code Repository (gitea)
 
 ## Preparing Local Package Repository
 Preparing Local Binary RPM/DEB Package Repository (webdav)

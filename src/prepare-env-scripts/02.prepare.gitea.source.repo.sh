@@ -12,26 +12,28 @@ fi
 
 if [ ! -f $GITEA_APP_INI_FILE ]
 then
-   echo "please go into directory rust-dev-env/src/prepare-env-scripts"
+   echo "please go into the directory that conntains the file $GITEA_APP_INI_FILE"
    echo "quiting..."
    exit 1
 fi
 
 
 export GITEA_HOME=$HOME/sdk/tools/gitea-$GITEA_VERSION/
+rm -Rf $GITEA_HOME
 mkdir -p $GITEA_HOME/custom/conf
 mkdir -p $GITEA_HOME/data/gitea-repositories
 mkdir -p $GITEA_HOME/data/lfs
 mkdir -p $GITEA_HOME/log
 
 cp ./gitea.app.ini $GITEA_HOME/custom/conf/app.ini
-cp ./gitea.db $GITEA_HOME/data
+#cp ./gitea.db $GITEA_HOME/data
 
 perl -pi -e "s/GITEA_RUN_USER/$USER/g" $GITEA_HOME/custom/conf/app.ini
 perl -pi -e "s#GITEA_HOME#$GITEA_HOME#g" $GITEA_HOME/custom/conf/app.ini
  
 mkdir -p $HOME/tmp
 cd $HOME/tmp
+rm -f gitea-$GITEA_VERSION-$GITEA_OS_ARCH*.xz*
 wget --no-check-certificate https://dl.gitea.com/gitea/1.22.4/gitea-$GITEA_VERSION-$GITEA_OS_ARCH.xz
 xz -d -v gitea-$GITEA_VERSION-$GITEA_OS_ARCH.xz
 chmod +x gitea-$GITEA_VERSION-$GITEA_OS_ARCH
@@ -43,6 +45,7 @@ mv gitea-$GITEA_VERSION-$GITEA_OS_ARCH $GITEA_HOME
 
 cd $GITEA_HOME
 
+rm -f gitea_executable
 ln -s gitea-$GITEA_VERSION-$GITEA_OS_ARCH gitea_executable
 
 echo '#!/bin/bash
@@ -54,7 +57,7 @@ echo ">>> GITEA_HOME=$GITEA_HOME "
 
 echo '#!/bin/bash
 cd $GITEA_HOME
-./gitea_executable 
+nohup ./gitea_executable >& $GITEA_HOME/log/gitea.run.log &
 ' > run.sh
 chmod +x run.sh
 
