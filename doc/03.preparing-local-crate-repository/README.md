@@ -27,8 +27,8 @@
 8. Now we will configure the access authorization for cargo-test and cargo-prod crate registries. We will restrict only the write access for cargo-prod registry.
 
 - create "cargo-test-access" user : 
- + Click on the icon on the rigt-top most of the page (you are adm001 user). Click on the "Site Administration", then  "Identity & Access" on the left menu, and then "User Accounts". 
- + This user will be used for uploading crates to "cargo-test" registry, this will be especially needed by library developers, to let the experimental libraries reached by the application developers.
+  + Click on the icon on the rigt-top most of the page (you are adm001 user). Click on the "Site Administration", then  "Identity & Access" on the left menu, and then "User Accounts". 
+  + This user will be used for uploading crates to "cargo-test" registry, this will be especially needed by library developers, to let the experimental libraries reached by the application developers.
       
 - create "cargo-prod-access" user : 
  + Click on the icon on the rigt-top most of the page (you are adm001 user). Click on the "Site Administration", then  "Identity & Access" on the left menu, and then "User Accounts". 
