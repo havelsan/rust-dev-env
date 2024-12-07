@@ -58,14 +58,14 @@
   + Repository and Organization Access = All
   + Select Permissions = Package = "Read and Write", Reposiroty="Read nd Write", the rest is "No Access".
   + Click on the "Generate Token" button.
-  + When you click on the "Generate Token" button, there will appear a token key on the top of the page with blue background. ** Save this key to a file.** ( Example key : 17e5616bf481c9f46350312ba533edfc8d383806).
+  + When you click on the "Generate Token" button, there will appear a token key on the top of the page with blue background. __ Save this key to a file. __ ( Example key : 17e5616bf481c9f46350312ba533edfc8d383806).
 
 - Do all of the steps above for also the cargo-prod-access user.
 
 10. create also cargo-thirdparty organization and crate registry within it. We will use this repository for all libs downloaded from internet.
 
 11. Configure cargo-test, cargo-thirdparty and cargo-prod registries in the developers home directory and configure write access to cargo-test registry:
-- Write the following into the $HOME/.cargo/config.toml file. ** NOTE: change localhost to your hostname accordingly :) **
+- Write the following into the $HOME/.cargo/config.toml file. __ NOTE: change localhost to your hostname accordingly :) __
 ```
 [registry]
 default = "cargo-prod"
@@ -84,7 +84,7 @@ git-fetch-with-cli = true
 
 ```
  
-- write the access token previously generated access token to the file $HOME/.cargo/credentials.toml, **NOTE: 17e5616bf481c9f46350312ba533edfc8d383806 string should be replaced by what ever cargo-test access token is gernerated by you :) **
+- write the access token previously generated access token to the file $HOME/.cargo/credentials.toml, __ NOTE: 17e5616bf481c9f46350312ba533edfc8d383806 string should be replaced by what ever cargo-test access token is gernerated by you :) __
 ```
 [registries.cargo-test]
 token = "Bearer 17e5616bf481c9f46350312ba533edfc8d383806"
