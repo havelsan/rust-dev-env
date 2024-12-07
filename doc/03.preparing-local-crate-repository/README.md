@@ -31,20 +31,20 @@
   + This user will be used for uploading crates to "cargo-test" registry, this will be especially needed by library developers, to let the experimental libraries reached by the application developers.
       
 - create "cargo-prod-access" user : 
- + Click on the icon on the rigt-top most of the page (you are adm001 user). Click on the "Site Administration", then  "Identity & Access" on the left menu, and then "User Accounts". 
- + This user will be used for uploading crates to "cargo-prod" registry, this will be used only by jenkins to write to prod registry. Normal users will only have read access to cargo-prod registry. 
+  + Click on the icon on the rigt-top most of the page (you are adm001 user). Click on the "Site Administration", then  "Identity & Access" on the left menu, and then "User Accounts". 
+  + This user will be used for uploading crates to "cargo-prod" registry, this will be used only by jenkins to write to prod registry. Normal users will only have read access to cargo-prod registry. 
 
 - Configure authorization for cargo-test organization :
- + Click "Explore" link on the top, and select "Organization" tab in the page and click on the "cargo-test" link
- + Click on the "Teams" link on the page.
- + Click on the "New Team" button
-  * Team Name = cargo-test-writers
-  * Description = cargo-test-writers
-  * Repository Access = All Repositories
-  * Permission = General Access
-  * Allow Access Repository Sections = Code = "WRITE", Packages= "WRITE", the rest will be "READ".
- + Click on the Create Team Button           
- + Add team member "cargo-test-access" 
+  + Click "Explore" link on the top, and select "Organization" tab in the page and click on the "cargo-test" link
+  + Click on the "Teams" link on the page.
+  + Click on the "New Team" button
+    * Team Name = cargo-test-writers
+    * Description = cargo-test-writers
+    * Repository Access = All Repositories
+    * Permission = General Access
+    * Allow Access Repository Sections = Code = "WRITE", Packages= "WRITE", the rest will be "READ".
+  + Click on the Create Team Button           
+  + Add team member "cargo-test-access" 
 
 - The same previous operation should be made for "cargo-prod" organization.
 
@@ -92,17 +92,17 @@ token = "Bearer 17e5616bf481c9f46350312ba533edfc8d383806"
     
 11. test the access :
 - create a rust project :
- + source $HOME/sdk/infra/1.0.0/release
- + mkdir -p $HOME/workspace
- + cd $HOME/workspace
- + cargo new hello_cargo
- + cd hello_cargo
- + if you want to restrict the module to be ublished to only "cargo-test" registry, write ' publish = ["cargo-test"] ' in the " [package] " section of the  Cargo.toml file. But i would not recommend it because we will use different registry (cargo-prod) in the Jenkins builds.
+  + source $HOME/sdk/infra/1.0.0/release
+  + mkdir -p $HOME/workspace
+  + cd $HOME/workspace
+  + cargo new hello_cargo
+  + cd hello_cargo
+  + if you want to restrict the module to be ublished to only "cargo-test" registry, write ' publish = ["cargo-test"] ' in the " [package] " section of the  Cargo.toml file. But i would not recommend it because we will use different registry (cargo-prod) in the Jenkins builds.
  
 - Make package
- + cargo package --allow-dirty
+  + cargo package --allow-dirty
 - Try to push to cargo-test registry
- + cargo push --registry=cargo-test  --allow-dirty
- + The above command should write "Uploaded hello_cargo v0.1.0 to registry cargo-test" in the end. 
+  + cargo push --registry=cargo-test  --allow-dirty
+  + The above command should write "Uploaded hello_cargo v0.1.0 to registry cargo-test" in the end. 
 
 
