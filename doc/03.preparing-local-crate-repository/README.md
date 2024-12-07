@@ -13,7 +13,7 @@
 5. create an organization with the name "cargo-test" 
    - click on the "+" sign on the right-top of the page
    - click on the "New Organization" button.
-   - Organization Name= "cargo", visibility = "Public" , Permissions = "Reposiroty Admin ..." is selected.
+   - Organization Name= "cargo-test", visibility = "Public" , Permissions = "Reposiroty Admin ..." is selected.
    - click on "Create Organization"
 
 6. create "crate registry" 
