@@ -1,12 +1,71 @@
-# Prepare Local Crate Repository
+# Updating Local Thirdparty Crate Registry
 
-0. run the gitea start script : cd $HOME/sdk/tools/gitea-1.22.4 && ./run.sh
+## Download the crates using a machine connected to internet :
 
-1. sudo apt-get install libssl-dev
-   
-2. cargo install cargo-local-registry
+1. Use always the same account to download the crates, so that every admin will connect to the same account and see accumulate the previously downloaded crates.
+2. ssh to a machine which has internet connection.
+3. In that account, ONLY for the first time, run the following steps (if you already executed the following steps, you may ommit this step): 
+ - if you not already did, do the steps in "01.preparing-rust-sdk-directory" and source the release "source $HOME/sdk/infra/1.0.0/release"
+ - if you are behind a proxy run the "cd ../../src/prepare-env-scripts/; ./04.configure.proxy.sh "
+ - Prepare an empty rust project dir:
+   + mkdir -p $HOME/download-crates
+   + cd $HOME/download-crates
+   + cargo init
+4. run command : "source $HOME/release.proxy" if you are behind a proxy.
+5. cd $HOME/download-crates
+6. For each module and its version write the followwing command
+ - cargo add --registry=crates-io <module>@<version> # for example : cargo add --registry=crates-io serde@1.0.100
+ - cargo update -p <module> --precise <version> # for example : cargo update -p serde --precise 1.0.100
+7. Download using the following command :
+ - cargo fetch
 
-3. goto http://localhost:3000
+
+## Pack all the downloaded crates (libraries)
+
+1. run the script "cd ../../src/prepare-env-scripts/; ./04.pack.all.downloaded.in.this.day.sh " 
+  - This script makes a tar.gz package of all the modules downloaded in the same day. and copies it to $HOME/creates directory. 
+2. copy the $HOME/crates/crates.$(date '+%Y%m%d').tar.gz file to a machine in the intranet network to the directory $HOME/import_creates ( crates.20241209.tar.gz means the packages of creates which are downloaded in 9 December 2024 )
+
+
+
+## UnPack all the downloaded crates and upload to cargo-thirdparty local repository
+
+1. run the script "cd ../../src/prepare-env-scripts/; ./04.unpack.and.upload.to.local.cargo-thirdpaty.registry.sh " 
+2. Package the last
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 4. login using adm001 (this user was created in step "Preparing Local Source Code Repository")
 
@@ -70,6 +129,9 @@
 [registry]
 default = "cargo-prod"
 
+[registries.crates-io]
+index = "sparse+https://index.crates.io/" # Sparse index
+
 [registries.cargo-prod]
 index = "sparse+http://localhost:3000/api/packages/cargo-prod/cargo/" # Sparse index
 
@@ -102,7 +164,8 @@ token = "Bearer 17e5616bf481c9f46350312ba533edfc8d383806"
 - Make package
  + cargo package --allow-dirty
 - Try to push to cargo-test registry
- + cargo push --registry=cargo-test  --allow-dirty
+ + cargo publish --registry=cargo-test  --allow-dirty
  + The above command should write "Uploaded hello_cargo v0.1.0 to registry cargo-test" in the end. 
+ + cargo yank --registry=cargo-test --version 0.1.0 # this command deletes the previously uploaded package from the cargo-test registry, yoou should also give the version!
 
 

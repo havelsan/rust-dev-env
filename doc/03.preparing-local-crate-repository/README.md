@@ -66,10 +66,13 @@
 10. create also cargo-thirdparty organization and crate registry within it. We will use this repository for all libs downloaded from internet.
 
 11. Configure cargo-test, cargo-thirdparty and cargo-prod registries in the developers home directory and configure write access to cargo-test registry:
-- Write the following into the $HOME/.cargo/config.toml file. NOTE: change localhost to your hostname accordingly :)
+- Write the following into the $HOME/.cargo/config.toml file. ** NOTE: change localhost to your hostname accordingly :) **
 ```
 [registry]
 default = "cargo-prod"
+
+[registries.crates-io]
+index = "sparse+https://index.crates.io/" # Sparse index
 
 [registries.cargo-prod]
 index = "sparse+http://localhost:3000/api/packages/cargo-prod/cargo/" # Sparse index
@@ -85,7 +88,7 @@ git-fetch-with-cli = true
 
 ```
  
-- write the access token previously generated access token to the file $HOME/.cargo/credentials.toml, NOTE: 17e5616bf481c9f46350312ba533edfc8d383806 string should be replaced by what ever cargo-test access token is gernerated by you :)
+- write the access token previously generated access token to the file $HOME/.cargo/credentials.toml, **NOTE: 17e5616bf481c9f46350312ba533edfc8d383806 string should be replaced by what ever cargo-test access token is gernerated by you :) **
 ```
 [registries.cargo-test]
 token = "Bearer 17e5616bf481c9f46350312ba533edfc8d383806"
@@ -93,17 +96,18 @@ token = "Bearer 17e5616bf481c9f46350312ba533edfc8d383806"
     
 11. test the access :
 - create a rust project :
-  + source $HOME/sdk/infra/1.0.0/release
-  + mkdir -p $HOME/workspace
-  + cd $HOME/workspace
-  + cargo new hello_cargo
-  + cd hello_cargo
-  + if you want to restrict the module to be ublished to only "cargo-test" registry, write ' publish = ["cargo-test"] ' in the " [package] " section of the  Cargo.toml file. But i would not recommend it because we will use different registry (cargo-prod) in the Jenkins builds.
+ + source $HOME/sdk/infra/1.0.0/release
+ + mkdir -p $HOME/workspace
+ + cd $HOME/workspace
+ + cargo new hello_cargo
+ + cd hello_cargo
+ + if you want to restrict the module to be ublished to only "cargo-test" registry, write ' publish = ["cargo-test"] ' in the " [package] " section of the  Cargo.toml file. But i would not recommend it because we will use different registry (cargo-prod) in the Jenkins builds.
  
 - Make package
-  + cargo package --allow-dirty
+ + cargo package --allow-dirty
 - Try to push to cargo-test registry
-  + cargo push --registry=cargo-test  --allow-dirty
-  + The above command should write "Uploaded hello_cargo v0.1.0 to registry cargo-test" in the end. 
-
-
+ + cargo publish --registry=cargo-test  --allow-dirty
+ + The above command should write "Uploaded hello_cargo v0.1.0 to registry cargo-test" in the end. 
+ + cargo yank --registry=cargo-test --version 0.1.0 # this command deletes the previously uploaded package from the cargo-test registry, yoou should also give the version!
+ 
+ 
