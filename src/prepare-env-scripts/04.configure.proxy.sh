@@ -19,31 +19,31 @@ else
     git config --global http.proxy $http_proxy
     git config --global http.sslVerify false
     git config --global http.proxyAuthMethod 'basic'
-fi
 
 
-mkdir -p $HOME/.cargo
 
-grep cainfo  $HOME/.cargo/config.toml >/dev/null
-if [ $? != 0 ]
-then
+    mkdir -p $HOME/.cargo
 
-  echo 'openssl s_client -showcerts -connect www.google.com:443 </dev/null'
-  (
-     openssl s_client -showcerts -connect www.google.com:443 </dev/null | sed -n -e '/-.BEGIN/,/-.END/ p' > ~/.cargo/certs.pem
-  )>&/dev/null
+    grep cainfo  $HOME/.cargo/config.toml >/dev/null
+    if [ $? != 0 ]
+    then
 
-  echo '
+     echo 'openssl s_client -showcerts -connect www.google.com:443 </dev/null'
+     (
+       openssl s_client -showcerts -connect www.google.com:443 </dev/null | sed -n -e '/-.BEGIN/,/-.END/ p' > ~/.cargo/certs.pem
+     )>&/dev/null
+
+     echo '
 [http]
 check-revoke=false
 timeout=60
 multiplexing = false
 cainfo=".cargo/certs.pem"
-   ' >> $HOME/.cargo/config.toml
+      ' >> $HOME/.cargo/config.toml
 
-fi
+     fi
 
 
    
-
+fi
 

@@ -88,10 +88,14 @@ git-fetch-with-cli = true
 
 ```
  
-- write the access token previously generated access token to the file $HOME/.cargo/credentials.toml, **NOTE: 17e5616bf481c9f46350312ba533edfc8d383806 string should be replaced by what ever cargo-test access token is gernerated by you :) **
+- write the access token previously generated access token to the file $HOME/.cargo/credentials.toml, **NOTE: 17e5616bf481c9f46350312ba533edfc8d383806 string should be replaced by what ever cargo-test access token is gernerated by you :)**
 ```
 [registries.cargo-test]
 token = "Bearer 17e5616bf481c9f46350312ba533edfc8d383806"
+
+[registries.cargo-thirdparty]
+token = "Bearer 401e7c68f09e4e10ad483ba97a50c84086eedb25"
+
 ```
     
 11. test the access :
