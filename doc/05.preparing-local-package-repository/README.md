@@ -177,7 +177,10 @@ chown -Rf maintain:staff /opt/testpkg
 ```
   - Create testpkg.deb package file 
    * dpkg-deb -b testpkg
-   
+
+  - Check the contents of testpkg.deb package file 
+   * dpkg -c testpkg.deb
+
 2. Upload generated deb package to the repository
   - By using the following curl command, we upload directly to http://localhost:3000/api/packages/deb-test/debian/pool/TARGET_PLATFORM_GROUP-TARGET_PLATFORM-1.0.0/main/upload url. We don't need to create any directory, this directory becomes immediately available after the first package upload.
   - "curl --user usr001:<usr001_token_created_in_settings_applications> --upload-file testpkg.deb http://localhost:3000/api/packages/deb-test/debian/pool/TARGET_PLATFORM_GROUP-TARGET_PLATFORM-1.0.0/main/upload"
@@ -199,6 +202,10 @@ grep ^Package: /var/lib/apt/lists/localhost:3000_api_packages_deb-test_debian_di
 5. Installing the "testpkg" rpm form the repository
   - Do the configurations shown in the "step 4". (apt repository configurations)
   - "apt install testpkg"
+  - Check the installed files of testpkg package 
+   * dpkg -L testpkg
+  - You can remove the testpkg package with
+   * dpkg -r testpkg
 
 6. Deleting package from the repository 
   - You may delete the rpm packages from the web user interface : 
