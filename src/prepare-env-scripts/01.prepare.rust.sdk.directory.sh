@@ -16,6 +16,7 @@ rm -Rf $RUST_VERSION*
 
 wget --no-check-certificate https://static.rust-lang.org/dist/$RUST_VERSION.tar.xz
 mkdir -p $HOME/sdk/tools
+mkdir -p $HOME/sdk/services/1.0.0/
 mkdir -p $HOME/sdk/infra/1.0.0/
 tar xvf $RUST_VERSION.tar.xz
 cd $RUST_VERSION
@@ -42,6 +43,18 @@ do
 	fi
 done
 ' > $HOME/sdk/infra/1.0.0/release
+
+echo '#!/bin/bash
+export SDK_SERVICES_DIR=`cd \`dirname $( readlink -f $BASH_SOURCE ) \` && pwd`
+export SDK_SERVICES_VERSION=$(echo $SDK_SERVICES_DIR| sed -e "s#.*/sdk/services/##")
+for i in $SDK_SERVICES_DIR/*
+do
+	if [ -e $i/release ]
+	then
+		. $i/release
+	fi
+done
+' > $HOME/sdk/services/1.0.0/release
 
 
 echo '#!/bin/bash

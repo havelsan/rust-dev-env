@@ -8,8 +8,7 @@ This repository contains rust development environment preparation scripts and do
 2. [Preparing Local Crate Registry](doc/03.preparing-local-crate-registry/)
 4. [Updating Local Thirdparty Crate Registry](doc/04.updating-local-thirdparty-crate-registry/)
 5. [Preparing Local OS Package (rpm/deb) Repository](doc/05.preparing-local-package-repository/)
-6. [Preparing Package Set Manager](#preparing-local-package-repository)
-7. [Preparing Runtime Environment](#preparing-runtime-environment)
+6. [Preparing Services](doc/06.preparing-services)
 7. [Preparing IDEs](#preparing-runtime-environment)
 8. [Preparing Runtime Environment Monitoring Tools Installation and Usage Examples](#Preparing-Runtime-Environment-Monitoring-Tools-Installation-and-Usage-Examples)
 9. [Debugging Tools Installation and Usage Examples](#Debugging-Tools-Installation-and-Usage-Examples)
@@ -18,11 +17,8 @@ This repository contains rust development environment preparation scripts and do
 12. [CI/CD](#ci-cd)
 
 
-## Preparing Local Package Repository
-Preparing Local Binary RPM/DEB Package Repository (webdav)
-
 ## Preparing Runtime Environment
-Redis, Aerospike, Nginx, FastDDS, RustDDS, Log Server and configuring other servers to redirect their logs to  this server.
+Aerospike, Nginx, FastDDS, RustDDS, Log Server and configuring other servers to redirect their logs to  this server.
 
 ## Preparing Runtime Environment Monitoring Tools Installation and Usage Examples
 P3X Redis UI, Clairvoyance for Aerospike, Nginx, Fast DDS Monitor, Wireshark, Log Server ELK-Graphana
