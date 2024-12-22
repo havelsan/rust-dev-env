@@ -18,7 +18,7 @@ then
 fi
 
 
-export GITEA_HOME=$HOME/sdk/tools/gitea-$GITEA_VERSION/
+export GITEA_HOME=$HOME/sdk/tools/1.0.0/gitea-$GITEA_VERSION/
 rm -Rf $GITEA_HOME
 mkdir -p $GITEA_HOME/custom/conf
 mkdir -p $GITEA_HOME/data/gitea-repositories

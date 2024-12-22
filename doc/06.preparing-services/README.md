@@ -1,8 +1,12 @@
-# Preparing Runtime Environment
+# Preparing Services
+Aerospike,FastDDS,Nginx. 
 
-Aerospike,FastDDS, Nginx, 
-
-
+Note : 
+  - Aerospike occupies the ports "2$UID", "3$UID", "4$UID", "5$UID"  
+  - FastDDS discovery service occupies the port "1$UID"
+  - Nginx occupies the port "6$UID", with $UID=$((UID%5000))
+  
+   
 ## Preparing Aerospike 
 
 1. Checkout and build the aerospike server :
@@ -28,7 +32,7 @@ mv a/opt/aerospike/usr/udf/lua udf
 rm -Rf a; cd ..
 rm -Rf $HOME/workspace/tmp
 mkdir -p $HOME/workspace/tmp
-git tag | tail -1 > aerospike/version
+git tag| sort -V| tail -1> aerospike/version
 mv aerospike $HOME/workspace/tmp/ 
 ```
 
@@ -235,7 +239,153 @@ $AEROSPIKE_HOME/bin/aql -h localhost -p $USER_PORT_1
 
 
 ## Preparing FastDDS
+https://fast-dds.docs.eprosima.com/en/latest/installation/sources/sources_linux.html
 
- 
+0. Prepare libraries
+```
+sudo apt install cmake g++ python3-pip wget git
+sudo apt install libasio-dev libtinyxml2-dev
+sudo apt install libssl-dev
+sudo apt install softhsm2
+sudo usermod -a -G softhsm $(whoami)
+sudo apt install libengine-pkcs11-openssl
+```
+
+
+1. Checkout Fast-DDS
+```
+cd ~/workspace
+git clone https://github.com/eProsima/Fast-DDS
+git clone https://github.com/eProsima/foonathan_memory_vendor.git
+git clone https://github.com/eProsima/Fast-CDR.git
+```
+
+2. Build and install
+```
+mkdir ~/workspace/foonathan_memory_vendor/build
+cd foonathan_memory_vendor/build
+cmake .. -DCMAKE_INSTALL_PREFIX=~/workspace/Fast-DDS/install -DBUILD_SHARED_LIBS=ON
+cmake --build . --target install
+
+cd ~/workspace
+mkdir Fast-CDR/build
+cd Fast-CDR/build
+cmake .. -DCMAKE_INSTALL_PREFIX=~/workspace/Fast-DDS/install
+cmake --build . --target install
+
+cd ~/workspace
+mkdir Fast-DDS/build
+cd Fast-DDS/build
+cmake ..  -DCMAKE_INSTALL_PREFIX=~/workspace/Fast-DDS/install
+cmake --build . --target install
+
+cd ~/workspace/Fast-DDS
+git tag| sort -V| tail -1 > install/version
+mv install $HOME/sdk/services/1.0.0/Fast-DDS
+```
+
+3. Write $HOME/sdk/services/1.0.0/Fast-DDS/release file 
+```
+#!/bin/bash
+export FAST_DDS_HOME=`cd \`dirname $( readlink -f $BASH_SOURCE ) \` && pwd`
+
+PATH=$PATH:$FAST_DDS_HOME/bin
+LD_LIBRARY_PATH=$LS_LIBRARY_PATH:$FAST_DDS_HOME/lib
+
+echo ">>>  FAST_DDS_HOME=$FAST_DDS_HOME "
+```
+
+4. Write $FAST_DDS_HOME/bin/start_discovery_server.sh and make it executable (chmod +x $FAST_DDS_HOME/bin/start_discovery_server.sh)
+```
+USER_ID=$(id -u)
+if [ $USER_ID -lt 1000 ]
+then
+      USER_PORT=$((USER_ID+5000))
+else
+      USER_PORT=$USER_ID
+fi
+USER_PORT=$(($USER_PORT%10000))
+USER_PORT_1="1$USER_PORT"
+
+fastdds discovery -p $USER_PORT_1
+```
+
+## Preparing Nginx
+Nginx server may be used as http web server as well as tcp/udp proxy server or load balancer(https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/)
+
+0. Download and build
+```
+cd ~/workspace
+git clone https://github.com/nginx/nginx.git
+sudo apt install libpcre3-dev zlib1g-dev
+sudo apt install libssl-dev
+mkdir -p $HOME/workspace/nginx/install
+auto/configure --prefix=$HOME/workspace/nginx/install --with-http_ssl_module --with-stream
+make
+make install
+git tag| sort -V| tail -1 > install/version
+mv install nginx
+mv nginx $HOME/sdk/services/1.0.0/
+cd $HOME/sdk/services/1.0.0/nginx/
+mkdir -p bin
+```
+
+1. Write $HOME/sdk/services/1.0.0/nginx/release file
+```
+#!/bin/bash
+export NGINX_HOME=`cd \`dirname $( readlink -f $BASH_SOURCE ) \` && pwd`
+export PATH=$PATH:$NGINX_HOME/bin
+echo ">>>  NGINX_HOME=$NGINX_HOME "
+```
+
+2. Write $HOME/sdk/services/1.0.0/nginx/bin/start_nginx.sh file and make it executable
+```
+#!/bin/bash
+if [ "$NGINX_HOME" = "" ]
+then
+     echo $BASH_SOURCE| grep '^/'
+     if [ $? = 0 ]
+     then
+        export NGINX_HOME=$(echo $BASH_SOURCE| sed -e 's#/bin/start_nginx.sh##')
+     else
+        echo "Either call this script using absolute path, or set the NGINX_HOME env. variable"
+        exit 1
+     fi
+fi
+
+CURRENT_TIMESTAMP=$(date '+%Y%m%d%H%M%S')
+mkdir -p $HOME/.nginx
+
+if [ ! -d $HOME/.nginx/conf ]
+then
+     USER_ID=$(id -u)
+     if [ $USER_ID -lt 1000 ]
+     then
+          USER_PORT=$((USER_ID+5000))
+     else
+          USER_PORT=$USER_ID
+     fi
+     USER_PORT=$(($USER_PORT%5000))
+     USER_PORT_1="6$USER_PORT"
+
+     cp -Rf $NGINX_HOME/conf $HOME/.nginx/
+     perl -pi -e "s/listen\s*80\s*;/listen $USER_PORT_1;/" $HOME/.nginx/conf/nginx.conf
+
+     mkdir -p $HOME/.nginx/logs
+
+     mkdir -p $HOME/.nginx/html
+
+     echo $HOSTNAME > $HOME/.nginx/html/index.html
+
+fi
+
+
+echo "Configuration file is $HOME/.nginx/conf/nginx.conf"
+echo "Log file is $HOME/.nginx/logs/$CURRENT_TIMESTAMP.log"
+
+$NGINX_HOME/sbin/nginx -V >& $HOME/.nginx/logs/nginx.version.and.properties.log
+
+$NGINX_HOME/sbin/nginx -p $HOME/.nginx/ >& $HOME/.nginx/logs/$CURRENT_TIMESTAMP.log
+```
 
 

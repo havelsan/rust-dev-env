@@ -15,7 +15,7 @@ cd $HOME/tmp
 rm -Rf $RUST_VERSION*
 
 wget --no-check-certificate https://static.rust-lang.org/dist/$RUST_VERSION.tar.xz
-mkdir -p $HOME/sdk/tools
+mkdir -p $HOME/sdk/tools/1.0.0
 mkdir -p $HOME/sdk/services/1.0.0/
 mkdir -p $HOME/sdk/infra/1.0.0/
 tar xvf $RUST_VERSION.tar.xz
@@ -67,7 +67,7 @@ do
 		. $i/release
 	fi
 done
-' > $HOME/sdk/tools/release
+' > $HOME/sdk/tools/1.0.0/release
 
 
 

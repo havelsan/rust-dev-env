@@ -1,6 +1,6 @@
 # Prepare Local Crate Repository
 
-0. run the gitea start script : cd $HOME/sdk/tools/gitea-1.22.4 && ./run.sh
+0. run the gitea start script : cd $HOME/sdk/tools/1.0.0/gitea-1.22.4 && ./run.sh
 
 1. sudo apt-get install libssl-dev
    

@@ -9,5 +9,5 @@ This section contains rust sdk directory preparation scripts and documentation.
    for example : "cd ../../src/prepare-env-scripts/; ./01.prepare.rust.sdk.directory.sh rust-1.82.0-x86_64-unknown-linux-gnu"
    This script creates $HOME/tmp directory and creates temperary files in this directory, you may delete this directory manually after installation.
    This script creates $HOME/sdk directory amd installs rust and release files in this directory. You may move this directory anuwhere you want. ( For example /opt/sdk, then mount this directory from other developers' computers using nfs readonly)
-   You should source the $HOME/sdk/release to use rust emvironment.
+   You should source the $HOME/sdk/infra/1.0.0/release to use rust emvironment.
  

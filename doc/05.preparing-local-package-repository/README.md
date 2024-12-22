@@ -4,7 +4,7 @@
 ## Preparing RPM Repositories
 
 
-0. run the gitea start script : cd $HOME/sdk/tools/gitea-1.22.4 && ./run.sh
+0. run the gitea start script : cd $HOME/sdk/tools/1.0.0/gitea-1.22.4 && ./run.sh
 
 1. goto http://localhost:3000
 
@@ -131,7 +131,7 @@ dnf repository-packages gitea-rpm-test-TARGET_PLATFORM_GROUP-TARGET_PLATFORM-1.0
 
 ## Preparing Debian (deb) Repositories
 
-0. run the gitea start script : cd $HOME/sdk/tools/gitea-1.22.4 && ./run.sh
+0. run the gitea start script : cd $HOME/sdk/tools/1.0.0/gitea-1.22.4 && ./run.sh
 
 1. goto http://localhost:3000
 
