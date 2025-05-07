@@ -21,22 +21,28 @@ NOTE:
 5. [Preparing Local OS Package (rpm/deb) Repository](doc/05.preparing-local-package-repository/)
 6. [Preparing Services](doc/06.preparing-services)
 7. [Preparing IDEs](doc/07.preparing-ides)
-8. [Preparing Runtime Environment Monitoring Tools Installation and Usage Examples](#Preparing-Runtime-Environment-Monitoring-Tools-Installation-and-Usage-Examples)
-9. [Debugging Tools Installation and Usage Examples](#Debugging-Tools-Installation-and-Usage-Examples)
-10. [Rust Project Templates](#Rust-Project-Templates)
-11. [Architecture Templates](#Architecture-Templates)
-12. Full cycle test example
-13. [CI/CD](#ci-cd) Sonarqube rust analyzer.
+8. [Preparing Data Tools](doc/08.preparing-data-tools)
+9. [Preparing Log Monitoring Tools](doc/09.preparing-log-monitoring-tools)
+10. [Preparing Network Monitoring Tools](doc/10.preparing-network-monitoring-tools)
+11. [Debugging Tools Installation and Usage Examples](doc/11.debugging-tools)
+12. [Rust Project Templates](doc/12-rust-project-templates)
+13. [Architecture Templates](doc/13-rust-arhitecture-templates)
+14. Full cycle test example
+15. [CI/CD](#ci-cd) Sonarqube rust analyzer.
 
 
 
 
 
-## Preparing Runtime Environment Monitoring Tools Installation and Usage Examples
-P3X Redis UI, Clairvoyance for Aerospike, Nginx, Fast DDS Monitor, Wireshark, Log Server ELK-Graphana
+## Preparing  Data Monitoring Tools    
+Clairvoyance for Aerospike, Fast DDS Monitor, 
+Log Server ELK-Graphana
+Wireshark, tcpduöp , 
+os-command-scripts : df, ps (cpu,memory), top, iftop, nethogs?
+
 
 ## Debugging and Test Tools Installation and Usage Examples
-gdb, tail, top, ps, iftop, sar, nethogs, tail, accerciser, dbus-accessibility-conf, Selenium, tackle-test
+gdb, sar, accerciser, dbus-accessibility-conf, Selenium, tackle-test
  
 ## Rust Project Templates
 
@@ -56,7 +62,7 @@ Fast DDS : Fast DDS usage templates.
 
 Rust DDS : Rust DDS usage templates.
 
-Tokio : Tokio usage templates.
+Tokio : Tokio GRPC usage templates.
 
 Netty : Netty usage templates.
 
