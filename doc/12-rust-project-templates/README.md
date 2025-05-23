@@ -244,3 +244,26 @@ Write readable code first, optimize second
 
 
 
+
+
+
+-------------------------------------
+
+https://rust-unofficial.github.io/patterns/
+https://github.com/mre/idiomatic-rust
+https://www.mayhem.security/blog/best-practices-for-secure-programming-in-rust
+https://cratecode.com/info/rust-traits-best-practices
+https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/first-edition/testing.html
+https://zerotomastery.io/blog/complete-guide-to-testing-code-in-rust/
+
+https://doc.rust-lang.org/book/ch11-01-writing-tests.html
+https://github.com/mozilla/rust-code-analysis
+
+https://github.com/LaurentMazare/tch-rs
+https://github.com/vaaaaanquish/Awesome-Rust-MachineLearning
+https://github.com/Rust-GPU/Rust-CUDA
+
+
+
+
+-------------------------------------
