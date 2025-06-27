@@ -1,7 +1,7 @@
 
 if [ $# -lt 3 ]
 then
-  GITEA_VERSION=1.22.4
+  GITEA_VERSION=1.23.6
   GITEA_OS_ARCH=linux-amd64
   GITEA_APP_INI_FILE=./gitea.app.ini
 else
@@ -33,8 +33,10 @@ perl -pi -e "s#GITEA_HOME#$GITEA_HOME#g" $GITEA_HOME/custom/conf/app.ini
  
 mkdir -p $HOME/tmp
 cd $HOME/tmp
-rm -f gitea-$GITEA_VERSION-$GITEA_OS_ARCH*.xz*
-wget --no-check-certificate https://dl.gitea.com/gitea/1.22.4/gitea-$GITEA_VERSION-$GITEA_OS_ARCH.xz
+if [ ! -f  gitea-$GITEA_VERSION-$GITEA_OS_ARCH*.xz* ]
+then
+    wget --no-check-certificate https://dl.gitea.com/gitea/$GITEA_VERSION/gitea-$GITEA_VERSION-$GITEA_OS_ARCH.xz
+fi
 xz -d -v gitea-$GITEA_VERSION-$GITEA_OS_ARCH.xz
 chmod +x gitea-$GITEA_VERSION-$GITEA_OS_ARCH
 

@@ -14,18 +14,24 @@ mkdir -p $HOME/tmp
 cd $HOME/tmp
 rm -Rf $RUST_VERSION*
 
-wget --no-check-certificate https://static.rust-lang.org/dist/$RUST_VERSION.tar.xz
+mkdir -p ~/Downloads
+if [ ! -f ~/Downloads/$RUST_VERSION.tar.xz ]
+then
+ cd ~/Downloads
+ wget --no-check-certificate https://static.rust-lang.org/dist/$RUST_VERSION.tar.xz
+ cd -
+fi
 mkdir -p $HOME/sdk/tools/1.0.0
 mkdir -p $HOME/sdk/services/1.0.0/
 mkdir -p $HOME/sdk/infra/1.0.0/
-tar xvf $RUST_VERSION.tar.xz
+tar xvf ~/Downloads/$RUST_VERSION.tar.xz
 cd $RUST_VERSION
 ./install.sh --prefix=$HOME/sdk/infra/1.0.0/$RUST_VERSION
 
 echo '#!/bin/bash
 export RUST_HOME=`cd \`dirname $( readlink -f $BASH_SOURCE ) \` && pwd`
-export PATH=$PATH:$RUST_HOME/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$RUST_HOME/lib
+export PATH=$RUST_HOME/bin:$PATH
+export LD_LIBRARY_PATH=$RUST_HOME/lib:$LD_LIBRARY_PATH
 export CARGO_HTTP_CHECK_REVOKE=false
 WHICH_RUSTC=$(which rustc)
 RUSTC_VERSION=$(rustc --version)
@@ -70,4 +76,11 @@ done
 ' > $HOME/sdk/tools/1.0.0/release
 
 
+
+echo '#!/bin/bash
+
+. $HOME/sdk/infra/1.0.0/release
+. $HOME/sdk/services/1.0.0/release
+. $HOME/sdk/tools/1.0.0/release
+' > $HOME/sdk/release-1.0.0
 

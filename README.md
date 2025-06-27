@@ -1,22 +1,27 @@
 # Rust Development Environment
 This repository contains rust development environment preparation scripts and documentation.
 
-NOTE:
- - If your target systems (production systems, computers on the cars/trucks/ships/airplanes) will all have the same operating system ( e.g. RHEL 8.10)
-   Then it is a good idea to build your development environment on RHEL 8.10 or similar 8.X
- - You may update the tools, infra or services directories in sdk. (sdk/tools/1.0.0, sdk/infra/1.0.0, sdk/services/1.0.0)
-  * If you add/remove or change a component, then you make a new directory, and you link the unchanged components to the previous version directory .
-  * for example if you update aerospike service but let the fastdds and nginx services unchanged  
-   + first you create a new directory sdk/services/1.1.0 , 
-   + place the new aerospike installation in it, 
-   + create links nginx and fastdds to the sdk/services/1.0.0/nginx, and fastdds
+## The environment contains following components :
+
+1. Gitea Local source code repository
+2. Gitea Local crate registry
+3. Gitea Local rpm/deb repository
+4. Distribution Management Scripts
+5. Aerospike In Memory DB
+6. DBeaver database viewer / editor
+7. Nginx web server and tcp/udp proxy
+8. VSCode and rust extensions
+9. Rust Project/Design/Architecture Templates
+10. Rust Code Quality Tools
+11. Rust Test Scripts
+12. Debug/Monitoring Tool Scripts
      
 
 ## Table of Contents
 
 1. [Preparing Rust SDK Directory](doc/01.preparing-rust-sdk-directory/)
 2. [Preparing Local Source Code Repository](doc/02.preparing-local-source-code-repository/)  
-2. [Preparing Local Crate Registry](doc/03.preparing-local-crate-registry/)
+3. [Preparing Local Crate Registry](doc/03.preparing-local-crate-repository/)
 4. [Updating Local Thirdparty Crate Registry](doc/04.updating-local-thirdparty-crate-registry/)
 5. [Preparing Local OS Package (rpm/deb) Repository](doc/05.preparing-local-package-repository/)
 6. [Preparing Services](doc/06.preparing-services)
@@ -57,10 +62,6 @@ Wasm : Wasm usage templates.
 WebGL: WebGL usage templates.
 
 Aerospike : Aerospike usage templates.
-
-Fast DDS : Fast DDS usage templates.
-
-Rust DDS : Rust DDS usage templates.
 
 Tokio : Tokio GRPC usage templates.
 
