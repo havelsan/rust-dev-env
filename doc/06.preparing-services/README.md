@@ -1,9 +1,8 @@
 # Preparing Services
-Aerospike,FastDDS,Nginx. 
+Aerospike,Nginx. 
 
 Note : 
   - Aerospike occupies the ports "2$UID", "3$UID", "4$UID", "5$UID"  
-  - FastDDS discovery service occupies the port "1$UID"
   - Nginx occupies the port "6$UID", with $UID=$((UID%5000))
   
    
@@ -235,79 +234,6 @@ USER_PORT_1="2$USER_PORT"
 
 $AEROSPIKE_HOME/bin/aql -h localhost -p $USER_PORT_1
 
-```
-
-
-## Preparing FastDDS
-https://fast-dds.docs.eprosima.com/en/latest/installation/sources/sources_linux.html
-
-0. Prepare libraries
-```
-sudo apt install cmake g++ python3-pip wget git
-sudo apt install libasio-dev libtinyxml2-dev
-sudo apt install libssl-dev
-sudo apt install softhsm2
-sudo usermod -a -G softhsm $(whoami)
-sudo apt install libengine-pkcs11-openssl
-```
-
-
-1. Checkout Fast-DDS
-```
-cd ~/workspace
-git clone https://github.com/eProsima/Fast-DDS
-git clone https://github.com/eProsima/foonathan_memory_vendor.git
-git clone https://github.com/eProsima/Fast-CDR.git
-```
-
-2. Build and install
-```
-mkdir ~/workspace/foonathan_memory_vendor/build
-cd foonathan_memory_vendor/build
-cmake .. -DCMAKE_INSTALL_PREFIX=~/workspace/Fast-DDS/install -DBUILD_SHARED_LIBS=ON
-cmake --build . --target install
-
-cd ~/workspace
-mkdir Fast-CDR/build
-cd Fast-CDR/build
-cmake .. -DCMAKE_INSTALL_PREFIX=~/workspace/Fast-DDS/install
-cmake --build . --target install
-
-cd ~/workspace
-mkdir Fast-DDS/build
-cd Fast-DDS/build
-cmake ..  -DCMAKE_INSTALL_PREFIX=~/workspace/Fast-DDS/install
-cmake --build . --target install
-
-cd ~/workspace/Fast-DDS
-git tag| sort -V| tail -1 > install/version
-mv install $HOME/sdk/services/1.0.0/Fast-DDS
-```
-
-3. Write $HOME/sdk/services/1.0.0/Fast-DDS/release file 
-```
-#!/bin/bash
-export FAST_DDS_HOME=`cd \`dirname $( readlink -f $BASH_SOURCE ) \` && pwd`
-
-PATH=$PATH:$FAST_DDS_HOME/bin
-LD_LIBRARY_PATH=$LS_LIBRARY_PATH:$FAST_DDS_HOME/lib
-
-echo ">>>  FAST_DDS_HOME=$FAST_DDS_HOME "
-```
-
-4. Write $FAST_DDS_HOME/bin/start_discovery_server.sh and make it executable (chmod +x $FAST_DDS_HOME/bin/start_discovery_server.sh)
-```
-USER_ID=$(id -u)
-if [ $USER_ID -lt 1000 ]
-then
-      USER_PORT=$((USER_ID+5000))
-else
-      USER_PORT=$USER_ID
-fi
-USER_PORT=$(($USER_PORT%10000))
-USER_PORT_1="1$USER_PORT"
-
-fastdds discovery -p $USER_PORT_1
 ```
 
 ## Preparing Nginx
