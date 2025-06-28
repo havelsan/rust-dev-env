@@ -53,27 +53,29 @@ echo "Log file is ~/.DBeaverData/log_file"
 
 ```
 
-5. Copy template connection definition to dbeaver sdk directory
+5. Example Connection Strings :
 ```
+jdbc:aerospike:127.0.0.1:21000/test  
+(when you dont specify the namespace "test" , dbeaver fails to show and edit the data using "right click > view data"  on the table's name.)
+(this connection string is saved in $HOME/.local/share/DBeaverData/workspace6/General/.dbeaver/data-sources.json
 ```
  
-start.sh
- - data
-
-
-jdbc:aerospike:127.0.0.1:21000/test  --> when you dont specify the namespace "test" , dbeaver fails to show and edit the data using "right click > view data"  on the table's name.
-
-/home/mpekmezci/.local/share/DBeaverData/workspace6/General/.dbeaver/data-sources.json
-
-/home/mpekmezci/.local/share/DBeaverData/workspace6/.metadata/.config/drivers.xml
-
+6. Configure Aerospike Driver :
+```
+$HOME/.local/share/DBeaverData/workspace6/.metadata/.config/drivers.xml
 <driver id="46803A21-E83B-255C-8812-E34608B1958E" name="Aerospike" class="com.aerospike.jdbc.AerospikeDriver" port="21000" custom="true">
    <library type="jar" path="${DBEAVER_HOME}/plugins/uber-aerospike-jdbc-1.10.0.jar" custom="true"/>
+```
 
+7. Example Usage:
 
+Even tough the table "deneme2" does not exists in the namespace "test". You create it by inserting the first record :)
+
+```
 INSERT INTO test.deneme2(a, b,c) VALUES ('xyz', 'abc', 123)
 SELECT * FROM test.deneme2
 UPDATE test.deneme2 SET a='xyzs' WHERE a='xyz' AND b='abc' AND c=123;
+```
 
 
 
