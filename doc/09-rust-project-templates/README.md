@@ -271,3 +271,46 @@ https://github.com/Rust-GPU/Rust-CUDA
 
 RUST AEROSPIKE QT GITEA M2-DISK
 
+
+
+
+
+
+
+Preparing Data Monitoring Tools
+
+Clairvoyance for Aerospike, Fast DDS Monitor, Log Server ELK-Graphana Wireshark, tcpduöp , os-command-scripts : df, ps (cpu,memory), top, iftop, nethogs?
+Debugging and Test Tools Installation and Usage Examples
+
+gdb, sar, accerciser, dbus-accessibility-conf, Selenium, tackle-test
+Rust Project Templates
+
+Minimum executble size example
+
+Test : Unit, Integration, Fuzz, Scenario, test code generation templates, python gui tests qt accessibility, selenium tests, test driven development, data driven test, tackle-test
+
+Log4rs : Log usage templates, log redirection to LogServer, Probe placement strategies
+
+Wasm : Wasm usage templates.
+
+WebGL: WebGL usage templates.
+
+Aerospike : Aerospike usage templates.
+
+Tokio : Tokio GRPC usage templates.
+
+Netty : Netty usage templates.
+
+Burn : Burn usage templates.
+
+Trochrs : Torchrs usage templates.
+
+packaging : project/platform configurations, rpm usage templates, deb usage templates.
+
+qt : qt usage templates.
+
+rdlib : Rust dynamic lib with so templates.
+Architecture Templates
+Compiletime API and Runtime Service Architecture
+
+
