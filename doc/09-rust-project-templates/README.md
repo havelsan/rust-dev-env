@@ -293,7 +293,7 @@ Unnecessary .unwraps: if opt.is_some() { opt.unwrap() }.
 - Log4rs : Log usage templates, log redirection to LogServer, Probe placement strategies
 - Wasm : Wasm usage templates.
 - WebGL: WebGL usage templates.
-- Aerospike : Aerospike usage templates.
+- Aerospike : Aerospike usage and module templates.
 - Tokio : Tokio GRPC usage templates.
 - Netty : Netty usage templates.
 - Burn : Burn usage templates.
@@ -303,5 +303,15 @@ Unnecessary .unwraps: if opt.is_some() { opt.unwrap() }.
 - rdlib : Rust dynamic lib with so templates.
 - Architecture Templates
 - Compiletime API and Runtime Service Architecture
+- versioning and dependency management example
+- design pattern templates
+- redis usage / udf templates
+- secure connection and encrypt/decrypt template
+- linux kernel module template
+- sound processing templates
+- computer vision templates 
+- simple machine learning templates
+- reinforcement learning templates
+
 
 
