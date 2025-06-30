@@ -288,6 +288,8 @@ Unnecessary .unwraps: if opt.is_some() { opt.unwrap() }.
 - https://github.com/tbsaunde/at-spi2-core/blob/master/bus/accessibility.conf
 
 ## Rust Project Templates
+The template projects in the below list focuses on a specific subject only and are carefully studied.
+
 - Minimum executable size example
 - Test : Unit, Integration, Fuzz, Scenario, test code generation templates, python gui tests qt accessibility, selenium tests, test driven development, data driven test, tackle-test
 - Log4rs : Log usage templates, log redirection to LogServer, Probe placement strategies
