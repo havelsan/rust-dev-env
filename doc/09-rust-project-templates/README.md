@@ -1,4 +1,4 @@
-# Rust Project Templates
+p# Rust Project Templates
 This page containes links to Rust Project Templates, but before giving project template links , we offered some notes on software development. The Rust Project Templates links are at the end of this page.
 
 ##  MAIN RULES: 
@@ -315,3 +315,5 @@ Unnecessary .unwraps: if opt.is_some() { opt.unwrap() }.
 - rocket web framework template
 - big data frameworks usage templates
 - array slicing usage templates
+- cuda usage templates
+
