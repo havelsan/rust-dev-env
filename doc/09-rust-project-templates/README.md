@@ -290,9 +290,24 @@ Unnecessary .unwraps: if opt.is_some() { opt.unwrap() }.
 ## Rust Project Templates
 The template projects in the below list focuses on a specific subject only and are carefully studied.
 
-- Minimum executable size example
-- Test : Unit, Integration, Fuzz, Scenario, test code generation templates, python gui tests qt accessibility, selenium tests, test driven development, data driven test, tackle-test
-- Log4rs : Log usage templates, log redirection to LogServer, Probe placement strategies
+- Minimum executable size 
+    - level 1 : compile parameters for optimization stripping
+    - level 2 : non static binary, depending on other libs
+    - level 3 : non static binary, depending on both other libs and rust environment
+- Test
+    - Unit, 
+    - Integration, 
+    - Fuzz, 
+    - Scenario, 
+    - test code generation templates,
+    - selenium tests, 
+    - test driven development, 
+    - data driven test, 
+    - tackle-test
+- Log4rs 
+    - Log usage templates, 
+    - log redirection to LogServer, 
+    - Probe placement strategies
 - Wasm : Wasm usage templates.
 - WebGL: WebGL usage templates.
 - Aerospike : Aerospike usage and module templates.
@@ -300,8 +315,14 @@ The template projects in the below list focuses on a specific subject only and a
 - Netty : Netty usage templates.
 - Burn : Burn usage templates.
 - Trochrs : Torchrs usage templates.
-- Packaging : project/platform configurations, rpm usage templates, deb usage templates.
-- qt : qt usage templates.
+- Packaging
+    - project/platform configurations, 
+    - rpm usage templates, 
+    - deb usage templates.
+- qt
+    - qt usage templates.
+    - automated testing qt applications using  dbus, accessibility
+
 - rdlib : Rust dynamic lib with so templates.
 - Architecture Templates
 - Compiletime API and Runtime Service Architecture
