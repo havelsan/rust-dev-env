@@ -312,6 +312,6 @@ Unnecessary .unwraps: if opt.is_some() { opt.unwrap() }.
 - computer vision templates 
 - simple machine learning templates
 - reinforcement learning templates
-
-
-
+- rocket web framework template
+- big data frameworks usage templates
+- array slicing usage templates
