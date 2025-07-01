@@ -288,55 +288,59 @@ Unnecessary .unwraps: if opt.is_some() { opt.unwrap() }.
 - https://github.com/tbsaunde/at-spi2-core/blob/master/bus/accessibility.conf
 
 ## Rust Project Templates
-The template projects in the below list focuses on a specific subject only and are carefully studied.
+The template projects in the below list focuses only on a specific subject and are carefully studied.
 
-- Minimum executable size 
-    - level 1 : compile parameters for optimization stripping
-    - level 2 : non static binary, depending on other libs
-    - level 3 : non static binary, depending on both other libs and rust environment
+- Base
+    - Minimum executable size 
+         - level 1 : compile parameters for optimization stripping
+         - level 2 : non static binary, depending on other libs
+         - level 3 : non static binary, depending on both other libs and rust environment
+    - Versioning and dependency management
+    - rdlib : Rust dynamic lib with binary so.
+    - Array slicing usage
+    - Packaging
+        - project/platform configurations 
+        - RPM 
+        - DEB 
 - Test
-    - Unit, 
-    - Integration, 
-    - Fuzz, 
-    - Scenario, 
-    - test code generation templates,
-    - selenium tests, 
-    - test driven development, 
-    - data driven test, 
-    - tackle-test
+    - Unit 
+    - Integration 
+    - Fuzz 
+    - Scenario 
+    - Test code generation
+    - Selenium tests 
+    - Test driven development 
+    - Data driven test 
+    - Tackle-test
 - Log4rs 
-    - Log usage templates, 
-    - log redirection to LogServer, 
+    - Log usage templates 
+    - log redirection to LogServer 
     - Probe placement strategies
-- Wasm : Wasm usage templates.
-- WebGL: WebGL usage templates.
-- Aerospike : Aerospike usage and module templates.
-- Tokio : Tokio GRPC usage templates.
-- Netty : Netty usage templates.
-- Burn : Burn usage templates.
-- Trochrs : Torchrs usage templates.
-- Packaging
-    - project/platform configurations, 
-    - rpm usage templates, 
-    - deb usage templates.
-- qt
-    - qt usage templates.
-    - automated testing qt applications using  dbus, accessibility
-
-- rdlib : Rust dynamic lib with so templates.
-- Architecture Templates
-- Compiletime API and Runtime Service Architecture
-- versioning and dependency management example
-- design pattern templates
-- redis usage / udf templates
-- secure connection and encrypt/decrypt template
-- linux kernel module template
-- sound processing templates
-- computer vision templates 
-- simple machine learning templates
-- reinforcement learning templates
-- rocket web framework template
-- big data frameworks usage templates
-- array slicing usage templates
-- cuda usage templates
+- Web
+    - Wasm 
+    - WebGL
+    - Rocket web framework
+- Data Science
+    - Array slicing 
+    - Aerospike usage and modules
+    - Redis usage and udf 
+- Network 
+    - Tokio and GRPC 
+    - Netty 
+    - secure connection and encrypt/decrypt 
+- AI
+    - Simple machine learning examples
+    - Burn 
+    - Trochrs
+    - Reinforcement learning 
+    - Cuda usage 
+    - Computer vision 
+    - Sound processing 
+- Qt
+    - Qt examples
+    - Automated testing qt applications using  dbus and accessibility 
+- Architecture/Design Templates
+     - Compiletime API and Runtime Service Architecture
+     - Design pattern 
+- linux kernel module
 
