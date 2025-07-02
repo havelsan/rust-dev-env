@@ -31,7 +31,7 @@ cd $RUST_VERSION
 echo '#!/bin/bash
 export RUST_HOME=`cd \`dirname $( readlink -f $BASH_SOURCE ) \` && pwd`
 export PATH=$RUST_HOME/bin:$PATH
-export LD_LIBRARY_PATH=$RUST_HOME/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$RUST_HOME/lib:$RUST_HOME/lib/rustlib/x86_64-unknown-linux-gnu/lib/:$LD_LIBRARY_PATH
 export CARGO_HTTP_CHECK_REVOKE=false
 WHICH_RUSTC=$(which rustc)
 RUSTC_VERSION=$(rustc --version)

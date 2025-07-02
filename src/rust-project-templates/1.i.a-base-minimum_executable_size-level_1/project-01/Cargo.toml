@@ -1,0 +1,19 @@
+# Compiled With :
+# RUSTFLAGS='-C link-arg=-s -C prefer-dynamic   ' cargo build --release
+
+[profile.release]
+opt-level = 'z'     # Optimize for size.
+lto = true          # Enable Link Time Optimization
+codegen-units = 1   # Reduce number of codegen units to increase optimizations.
+panic = 'abort'     # Abort on panic
+
+[package]
+name = "project-01"
+version = "0.1.0"
+edition = "2024"
+authors = ["mehmetpekmezci <mehmet.pekmezci.32@gmail.com>"]
+
+[dependencies]
+
+
+
