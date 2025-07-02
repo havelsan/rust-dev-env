@@ -302,6 +302,7 @@ The template projects in the below list focuses only on a specific subject and a
         - project/platform configurations 
         - RPM 
         - DEB 
+    7. Publishing to a repository
 2. Test
     1. Unit 
     2. Integration 
