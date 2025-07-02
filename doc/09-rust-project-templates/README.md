@@ -290,57 +290,57 @@ Unnecessary .unwraps: if opt.is_some() { opt.unwrap() }.
 ## Rust Project Templates
 The template projects in the below list focuses only on a specific subject and are carefully studied.
 
-- Base
-    - Minimum executable size 
-         - level 1 : compile parameters for optimization stripping
-         - level 2 : non static binary, depending on other libs
-         - level 3 : non static binary, depending on both other libs and rust environment
-    - Versioning and dependency management
-    - rdlib : Rust dynamic lib with binary so.
-    - Array slicing usage
-    - Packaging
-        - project/platform configurations 
-        - RPM 
-        - DEB 
-- Test
-    - Unit 
-    - Integration 
-    - Fuzz 
-    - Scenario 
-    - Test code generation
-    - Selenium tests 
-    - Test driven development 
-    - Data driven test 
-    - Tackle-test
-- Log4rs 
-    - Log usage templates 
-    - log redirection to LogServer 
-    - Probe placement strategies
-- Web
-    - Wasm 
-    - WebGL
-    - Rocket web framework
-- Data Science
-    - Array slicing 
-    - Aerospike usage and modules
-    - Redis usage and udf 
-- Network 
-    - Tokio and GRPC 
-    - Netty 
-    - secure connection and encrypt/decrypt 
-- AI
-    - Simple machine learning examples
-    - Burn 
-    - Trochrs
-    - Reinforcement learning 
-    - Cuda usage 
-    - Computer vision 
-    - Sound processing 
-- Qt
-    - Qt examples
-    - Automated testing qt applications using  dbus and accessibility 
-- Architecture/Design Templates
-     - Compiletime API and Runtime Service Architecture
-     - Design pattern 
-- linux kernel module
+1. Base
+    1. Minimum executable size 
+         1. level 1 : compile parameters for optimization stripping
+         2. level 2 : non static binary, depending on other libs
+         3. level 3 : non static binary, depending on both other libs and rust environment
+    2. Versioning and dependency management
+    3. rdlib : Rust dynamic lib with binary so.
+    4. Array slicing usage
+    5. Packaging
+        1. project/platform configurations 
+        2. RPM 
+        3. DEB 
+2. Test
+    1. Unit 
+    2. Integration 
+    3. Fuzz 
+    4. Scenario 
+    5. Test code generation
+    6. Selenium tests 
+    7. Test driven development 
+    8. Data driven test 
+    9. Tackle-test
+3. Log4rs 
+    1. Log usage templates 
+    2. log redirection to LogServer 
+    3. Probe placement strategies
+4. Web
+    1. Wasm 
+    2. WebGL
+    3. Rocket web framework
+5. Data Science
+    1. Array slicing 
+    2. Aerospike usage and modules
+    3. Redis usage and udf 
+6. Network 
+    1. Tokio and GRPC 
+    2. Netty 
+    3. secure connection and encrypt/decrypt 
+7. AI
+    1. Simple machine learning examples
+    2. Burn 
+    3. Trochrs
+    4. Reinforcement learning 
+    5. Cuda usage 
+    6. Computer vision 
+    7. Sound processing 
+8. Qt
+    1. Qt examples
+    2. Automated testing qt applications using  dbus and accessibility 
+9. Architecture/Design Templates
+    1. Compiletime API and Runtime Service Architecture
+    2. Design pattern 
+10. linux kernel module
 
