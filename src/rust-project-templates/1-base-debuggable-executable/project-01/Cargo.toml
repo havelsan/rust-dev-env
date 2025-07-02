@@ -1,5 +1,4 @@
-# Compiled With :
-# RUSTFLAGS='-C link-arg=-s -C prefer-dynamic   ' cargo build --release
+#https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [profile.release]
 opt-level = 'z'     # Optimize for size.
@@ -12,7 +11,12 @@ name = "project-01"
 version = "0.1.0"
 edition = "2024"
 authors = ["mehmetpekmezci <mehmet.pekmezci.32@gmail.com>"]
-
+description=" Example Debugging Project, look into the build.sh file to see gdb debug commands"
+categories = ["my-category-01", "segment-01::csci-01::csc-01"]
+#build = "custom_build_name.rs"
+exclude = ["/ci", "images/", ".*"]
+include = ["/src", "COPYRIGHT", "/examples", "!/examples/big_example"]
+#publish = ["some-registry-name"]
 [dependencies]
 
 
