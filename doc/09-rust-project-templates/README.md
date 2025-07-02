@@ -291,17 +291,17 @@ Unnecessary .unwraps: if opt.is_some() { opt.unwrap() }.
 The template projects in the below list focuses only on a specific subject and are carefully studied.
 
 1. Base
-    1. Minimum executable size 
-         1. level 1 : compile parameters for optimization stripping
-         2. level 2 : non static binary, depending on other libs
-         3. level 3 : non static binary, depending on both other libs and rust environment
-    2. Versioning and dependency management
-    3. rdlib : Rust dynamic lib with binary so.
-    4. Array slicing usage
-    5. Packaging
-        1. project/platform configurations 
-        2. RPM 
-        3. DEB 
+    1. Debugging ('cargo build' command by default placces debg information, 'cargo build --release' clears debug information from binary)
+    2. Minimum Size Executable 
+         - compile parameters for optimization stripping (300 K, hello world application)
+         - non static binary, depending on other libs and rust env. (15K , hello world application)         
+    3. Versioning and dependency management
+    4. rdlib : Rust dynamic lib with binary so.
+    5. Array slicing usage
+    6. Packaging
+        - project/platform configurations 
+        - RPM 
+        - DEB 
 2. Test
     1. Unit 
     2. Integration 

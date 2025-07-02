@@ -7,4 +7,6 @@ ldd target/release/project-01
 file target/release/project-01
 #readelf -x .rodata target/release/project-01
 #objdump -s -j .rodata  target/release/project-01
-
+#strace target/release/project-01
+#gdb target/release/project-01
+### run, exit , 
