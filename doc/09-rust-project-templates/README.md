@@ -269,6 +269,7 @@ Unnecessary .unwraps: if opt.is_some() { opt.unwrap() }.
 ```
 
 ## Rust Links
+- https://docs.rs/
 - https://doc.rust-lang.org/book/
 - https://doc.rust-lang.org/cargo/
 - https://rust-unofficial.github.io/patterns/
