@@ -291,12 +291,12 @@ Unnecessary .unwraps: if opt.is_some() { opt.unwrap() }.
 The template projects in the below list focuses only on a specific subject and are carefully studied.
 
 1. Base
-    1. [Debugging With Gdb : Fast Introduction](../../src/rust-project-templates/1-base-debuggable-executable)
+    1. [Debugging With Gdb : Fast Introduction](../../src/rust-project-templates/1.i.base-debuggable-executable)
         - NOTE-1: project-01/build.sh file contains gdb usage commands.
         - NOTE-2: 'cargo build' command by default places debug information intothe generated  binary, 'cargo build --release' clears debug information from the binary.
-    2. Minimum Size Executable 
-         - compile parameters for optimization stripping (300 K, hello world application)
-         - non static binary, depending on other libs and rust env. (15K , hello world application)         
+    2. [Minimum Size Executable](../../src/rust-project-templates/2.ii.base-minimum_sized_executable) 
+         - compile parameters for optimization stripping (300 K, hello world application) (project-01/Cargo.toml compile paramaters)
+         - non static binary, depending on other libs and rust env. (15K , hello world application) (project-02/build.sh compile paramaters)         
     3. Versioning and dependency management
     4. rdlib : Rust dynamic lib with binary so.
     5. Array slicing usage
