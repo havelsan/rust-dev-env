@@ -1,4 +1,4 @@
-p# Rust Project Templates
+# Rust Project Templates
 This page containes links to Rust Project Templates, but before giving project template links , we offered some notes on software development. The Rust Project Templates links are at the end of this page.
 
 ##  MAIN RULES: 
@@ -291,7 +291,8 @@ Unnecessary .unwraps: if opt.is_some() { opt.unwrap() }.
 The template projects in the below list focuses only on a specific subject and are carefully studied.
 
 1. Base
-    1. Debugging ('cargo build' command by default placces debg information, 'cargo build --release' clears debug information from binary)
+    1. [Debugging With Gdb : Fast Introduction](../../src/rust-project-templates/1-base-debuggable-executable)
+        - NOTE: 'cargo build' command by default places debug information intothe generated  binary, 'cargo build --release' clears debug information from the binary 
     2. Minimum Size Executable 
          - compile parameters for optimization stripping (300 K, hello world application)
          - non static binary, depending on other libs and rust env. (15K , hello world application)         
