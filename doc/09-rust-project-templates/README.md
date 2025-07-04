@@ -270,6 +270,7 @@ Unnecessary .unwraps: if opt.is_some() { opt.unwrap() }.
 
 ## Rust Links
 - https://doc.rust-lang.org/book/
+- https://doc.rust-lang.org/cargo/
 - https://rust-unofficial.github.io/patterns/
 - https://github.com/mre/idiomatic-rust
 - https://www.mayhem.security/blog/best-practices-for-secure-programming-in-rust
@@ -288,7 +289,7 @@ Unnecessary .unwraps: if opt.is_some() { opt.unwrap() }.
 - https://github.com/tbsaunde/at-spi2-core/blob/master/bus/accessibility.conf
 
 ## Rust Project Templates
-The template projects in the below list focuses only on a specific subject and are carefully studied.
+The template projects in the below list focuses only on a specific subject with minimal code.
 
 1. Base
     1. [Debugging With Gdb : Fast Introduction](../../src/rust-project-templates/1.i.base-debuggable-executable)
