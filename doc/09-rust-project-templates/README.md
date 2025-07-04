@@ -297,6 +297,7 @@ The template projects in the below list focuses only on a specific subject with 
         - NOTE-1: project-01/build.sh file contains gdb usage commands.
         - NOTE-2: 'cargo build' command by default places debug information intothe generated  binary, 'cargo build --release' clears debug information from the binary.
     2. [Minimum Size Executable](../../src/rust-project-templates/2.ii.base-minimum_sized_executable) 
+         - Binary size with "cargo build" command is 3.6 MB (hello world application). The generated binary contains symbols and debug info
          - compile parameters for optimization stripping (300 K, hello world application) (project-01/Cargo.toml compile paramaters)
          - non static binary, depending on other libs and rust env. (15K , hello world application) (project-02/build.sh compile paramaters)         
     3. Versioning and dependency management
