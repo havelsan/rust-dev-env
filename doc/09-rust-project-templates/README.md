@@ -333,12 +333,22 @@ The template projects in the below list focuses only on a specific subject with 
         - NOTE: there is no way to override the variables in Cargo.toml using config.toml files. You should replace the key in Cargo.toml file using a linux command before executing it.
             * For Example : perl -pi -e "s/mykey=.*/mykey=$ENVVAR/" Cargo.toml
     6. Publishing to a registry is explained in the item 11 of [Preparing Local Create Repository](../03.preparing-local-crate-repository)
-    7. RDLIB : Rust dynamic lib with binary so.
-    8. Packaging
+
+--------------------
+    7. Rust Lib:
+        - Create the project with "cargo new a_service_api_01 --lib", this command creates a_service_api_01 directory with Cargo.toml and src/lib.rs example files inside.
+        - Write tests before writing the main code.
+        - Write some functionality in  a_service_api_01
+        - Compile and publish the a_service_api_01
+        - Create a_service_01 project that a_service_api_01 forward the requests
+        - Create a_user_project_01 that uses a_service_api_01 to reach the a_service_01 service.
+        - Create a starter script to test all.
+    8. RDLIB : Rust dynamic lib with binary so.
+    9. Packaging
         - project/platform configurations 
         - RPM 
         - DEB 
-    9. Publishing to a repository
+        - Publishing DEB and RPM packages are explained in 
 2. Test
     1. Unit 
     2. Integration 

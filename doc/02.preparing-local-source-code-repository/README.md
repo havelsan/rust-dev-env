@@ -12,7 +12,9 @@
    - PATH = GITEA_HOME/data/lfs
    - ROOT_PATH = GITEA_HOME/log
 
-4. Goto http://localhost:3000/ adress and create the admin user :
+4. "cd $GITEA_HOME; ./run.sh"
+
+5. Goto http://localhost:3000/ adress and create the admin user :
    - Click on the "Register" link found on the left top of the page.
    - username= adm001, email=adm001@localhost.com, password=adm001+++
    - NOTE : email and ldap configurations will not be covered in this tutorial. So we used a fake email adress for admin001

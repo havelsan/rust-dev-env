@@ -1,7 +1,7 @@
 
 if [ $# -lt 3 ]
 then
-  GITEA_VERSION=1.23.6
+  GITEA_VERSION=1.24.2
   GITEA_OS_ARCH=linux-amd64
   GITEA_APP_INI_FILE=./gitea.app.ini
 else

@@ -105,11 +105,8 @@ token = "Bearer 401e7c68f09e4e10ad483ba97a50c84086eedb25"
  + cd $HOME/workspace
  + cargo new hello_cargo
  + cd hello_cargo
- + if you want to restrict the module to be ublished to only "cargo-test" registry, write ' publish = ["cargo-test"] ' in the " [package] " section of the  Cargo.toml file. But i would not recommend it because we will use different registry (cargo-prod) in the Jenkins builds.
- 
-- Make package
+ + Enter 'publish = ["cargo-prod","cargo-test"] ' under the " [package] " section of the  Cargo.toml file.
  + cargo package --allow-dirty
-- Try to push to cargo-test registry
  + cargo publish --registry=cargo-test  --allow-dirty
  + The above command should write "Uploaded hello_cargo v0.1.0 to registry cargo-test" in the end. 
  + cargo yank --registry=cargo-test --version 0.1.0 # this command deletes the previously uploaded package from the cargo-test registry, yoou should also give the version!
