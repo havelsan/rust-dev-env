@@ -321,7 +321,7 @@ The template projects in the below list focuses only on a specific subject with 
              * log="*"  is for  >=0.0.0
              * log="1.*"  is for  >=1.0.0,  <2.0.0
              * log="1.2.*"  is for  >=1.2.0,  <1.3.0
-    5. [Rust Project Configuations](../../src/rust-project-templates/1.iv.base-rust_project_configurations)
+    5. [Rust Project Configurations](../../src/rust-project-templates/1.iv.base-rust_project_configurations)
          - If, for example, Cargo were invoked in /projects/foo/bar/baz, then the following configuration files would be probed for and unified in this order:
              * /projects/foo/.cargo/config.toml
              * /projects/.cargo/config.toml
@@ -332,8 +332,8 @@ The template projects in the below list focuses only on a specific subject with 
         - Credentials are stored in $HOME/.cargo/credentials.toml , but registry/repository urls are stored in $HOME/.cargo/config.toml file. This will be explained in the next section.
         - NOTE: there is no way to override the variables in Cargo.toml using config.toml files. You should replace the key in Cargo.toml file using a linux command before executing it.
             * For Example : perl -pi -e "s/mykey=.*/mykey=$ENVVAR/" Cargo.toml
-    6. Publishing the crate to a registry
-    7. rdlib : Rust dynamic lib with binary so.
+    6. Publishing to a registry is explained in the item 11 of [Preparing Local Create Repository](../03.preparing-local-crate-repository)
+    7. RDLIB : Rust dynamic lib with binary so.
     8. Packaging
         - project/platform configurations 
         - RPM 
