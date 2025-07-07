@@ -1,8 +1,9 @@
 # Rust Project Templates
-This page containes links to Rust Project Templates, but before giving project template links , we offered some notes on software development. The Rust Project Templates links are at the end of this page.
+This page contains links to Rust Project Templates, but before giving project template links , we offered some notes on software development. The Rust Project Templates links are at the end of this page.
 
 ##  MAIN RULES: 
 - Write readable code first, optimize second
+- Break your system into isolated, focused services.
 - Go for "Test Driven Development" when possible
 
 ## Elon Musk's 5 step process for making things in a better way
@@ -48,12 +49,10 @@ Don't reverse these 5 steps
 
 ## SOLID Principles
 * S - Single Responsibility Principle : A class should have only one reason to change, meaning it should have only one job or responsibility. 
-
 * O - Open-Closed Principle : Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification. This means you can add new functionality without altering existing code.
 * L - Liskov Substitution Principle : Subtypes should be substitutable for their base types without altering the correctness of the program. In simpler terms, if a class B inherits from class A, you should be able to use an object of class B wherever an object of class A is expected without breaking anything
 * I - Interface Segregation Principle : Clients should not be forced to depend on methods they do not use. Instead of one large interface, create smaller, more specific interfaces that clients can use
 * D - Dependency Inversion Principle : High-level modules should not depend on low-level modules. Both should depend on abstractions. This means using interfaces or abstract classes to decouple components and make them more flexible
-
 
 ## Common newbie mistakes or bad practices
 
@@ -295,7 +294,7 @@ The template projects in the below list focuses only on a specific subject with 
 1. Base
     1. Standard Rust Project Layout : [Project Layout](https://doc.rust-lang.org/cargo/guide/project-layout.html) 
         - Cargo.toml , .cargo/config.toml , src directory , tests directory (test directory for integration tests  not unit tests) ,  benches directory , examples directory
-        - The .gitignore file in the main directory of the project ( we assume this is where .git directory resides, each project has a different git repository) should contain "target/" string to prevent generated files to be commit to git. We also add *.rpm, *.deb, *.tar, *.tar.gz, *.zip entries to the .gitignore file, as shown below:
+        - The [.gitignore](../../.gitignore) file in the main directory of the project ( we assume this is where .git directory resides, each project has a different git repository) should contain "target/" string to prevent generated files to be commit to git. We also add *.rpm, *.deb, *.tar, *.tar.gz, *.zip entries to the .gitignore file, as shown below:
             * target/
             * *.rpm
             * *.deb
@@ -330,8 +329,8 @@ The template projects in the below list focuses only on a specific subject with 
              * $CARGO_HOME/config.toml which defaults to $HOME/.cargo/config.toml
         - If a key is specified in multiple config files, the values will get merged together. 
              * Numbers, strings, and booleans will use the value in the deeper config directory taking precedence over ancestor directories
-        - Credentials are stored in $HOME/.cargo/credentials.toml , but registry/repository urls arestored in $HOME/.cargo/config.toml file this will be explained in the next section.
-        - NOTE: there is no way to override the variables in Cargo.toml using config.toml files. You should replace the key in Cargo.toml file using a linuz command before executing it.
+        - Credentials are stored in $HOME/.cargo/credentials.toml , but registry/repository urls are stored in $HOME/.cargo/config.toml file. This will be explained in the next section.
+        - NOTE: there is no way to override the variables in Cargo.toml using config.toml files. You should replace the key in Cargo.toml file using a linux command before executing it.
             * For Example : perl -pi -e "s/mykey=.*/mykey=$ENVVAR/" Cargo.toml
     6. Publishing the crate to a registry
     7. rdlib : Rust dynamic lib with binary so.

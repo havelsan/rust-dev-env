@@ -4,3 +4,5 @@ target/
 *.tar
 *.tar.gz
 *.zip
+*.swp
+*.lock
