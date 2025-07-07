@@ -293,21 +293,46 @@ Unnecessary .unwraps: if opt.is_some() { opt.unwrap() }.
 The template projects in the below list focuses only on a specific subject with minimal code.
 
 1. Base
+    0. Standard Rust Project Layout : [Project Layout](https://doc.rust-lang.org/cargo/guide/project-layout.html) 
+        - Cargo.toml , .cargo/config.toml , src directory , tests directory (test directory for integration tests  not unit tests) ,  benches directory , examples directory
     1. [Debugging With Gdb : Fast Introduction](../../src/rust-project-templates/1.i.base-debuggable-executable)
         - NOTE-1: project-01/build.sh file contains gdb usage commands.
         - NOTE-2: 'cargo build' command by default places debug information intothe generated  binary, 'cargo build --release' clears debug information from the binary.
-    2. [Minimum Size Executable](../../src/rust-project-templates/2.ii.base-minimum_sized_executable) 
+    2. [Minimum Size Executable](../../src/rust-project-templates/1.ii.base-minimum_sized_executable) 
          - Binary size with "cargo build" command is 3.6 MB (hello world application). The generated binary contains symbols and debug info
          - compile parameters for optimization stripping (300 K, hello world application) (project-01/Cargo.toml compile paramaters)
          - non static binary, depending on other libs and rust env. (15K , hello world application) (project-02/build.sh compile paramaters)         
-    3. Versioning and dependency management
-    4. rdlib : Rust dynamic lib with binary so.
-    5. Array slicing usage
-    6. Packaging
+    3. [Versioning and dependency management](../../src/rust-project-templates/1.iii.base-versioning_and_dependency_management) 
+         - You only write direct dependencies, cargo build system will resolv sub dependencies. Similiar functionality as maven/gradle.
+         - dev-dependencies only used when compiling examples, tests, benches ( e.g. : cargo build --examples )
+         - "cargo tree" shows sub dependencies.
+         - "cargo info time@1.0.0" gives information about the time package with version 1.0.0
+         - if the project  depends on module "log" with version :
+             * log = "^1.2.3" is exactly equivalent to log = "1.2.3".
+             * log="~1.2.3"  is for  >=1.2.3, <1.3.0
+             * log="~1.2"  is for  >=1.2.0,  <1.3.0
+             * log="~1"  is for  >=1.0.0,  <2.0.0
+             * log="*"  is for  >=0.0.0
+             * log="1.*"  is for  >=1.0.0,  <2.0.0
+             * log="1.2.*"  is for  >=1.2.0,  <1.3.0
+    4. [Rust Project Configuations](../../src/rust-project-templates/1.iv.base-rust_project_configurations)
+         - If, for example, Cargo were invoked in /projects/foo/bar/baz, then the following configuration files would be probed for and unified in this order:
+             * /projects/foo/.cargo/config.toml
+             * /projects/.cargo/config.toml
+             * /.cargo/config.toml
+             * $CARGO_HOME/config.toml which defaults to $HOME/.cargo/config.toml
+        - If a key is specified in multiple config files, the values will get merged together. 
+             * Numbers, strings, and booleans will use the value in the deeper config directory taking precedence over ancestor directories
+        - Credentials are stored in $HOME/.cargo/credentials.toml , but registry/repository urls arestored in $HOME/.cargo/config.toml file this will be explained in the next section.
+        - NOTE: there is no way to override the variables in Cargo.toml using config.toml files. You should replace the key in Cargo.toml file using a linuz command before executing it.
+            * For Example : perl -pi -e "s/mykey=.*/mykey=$ENVVAR/" Cargo.toml
+    5. Publishing the crate to a registry
+    6. rdlib : Rust dynamic lib with binary so.
+    7. Packaging
         - project/platform configurations 
         - RPM 
         - DEB 
-    7. Publishing to a repository
+    8. Publishing to a repository
 2. Test
     1. Unit 
     2. Integration 
@@ -348,5 +373,6 @@ The template projects in the below list focuses only on a specific subject with 
 9. Architecture/Design Templates
     1. Compiletime API and Runtime Service Architecture
     2. Design pattern 
+    3. Using Common Enumeration With Other Languages
 10. linux kernel module
 
