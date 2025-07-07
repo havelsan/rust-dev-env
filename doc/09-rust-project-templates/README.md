@@ -293,7 +293,7 @@ Unnecessary .unwraps: if opt.is_some() { opt.unwrap() }.
 The template projects in the below list focuses only on a specific subject with minimal code.
 
 1. Base
-    0. Standard Rust Project Layout : [Project Layout](https://doc.rust-lang.org/cargo/guide/project-layout.html) 
+    1. Standard Rust Project Layout : [Project Layout](https://doc.rust-lang.org/cargo/guide/project-layout.html) 
         - Cargo.toml , .cargo/config.toml , src directory , tests directory (test directory for integration tests  not unit tests) ,  benches directory , examples directory
         - The .gitignore file in the main directory of the project ( we assume this is where .git directory resides, each project has a different git repository) should contain "target/" string to prevent generated files to be commit to git. We also add *.rpm, *.deb, *.tar, *.tar.gz, *.zip entries to the .gitignore file, as shown below:
             * target/
@@ -302,14 +302,14 @@ The template projects in the below list focuses only on a specific subject with 
             * *.tar
             * *.tar.gz
             * *.zip
-    1. [Debugging With Gdb : Fast Introduction](../../src/rust-project-templates/1.i.base-debuggable-executable)
+    2. [Debugging With Gdb : Fast Introduction](../../src/rust-project-templates/1.i.base-debuggable-executable)
         - NOTE-1: project-01/build.sh file contains gdb usage commands.
         - NOTE-2: 'cargo build' command by default places debug information intothe generated  binary, 'cargo build --release' clears debug information from the binary.
-    2. [Minimum Size Executable](../../src/rust-project-templates/1.ii.base-minimum_sized_executable) 
+    3. [Minimum Size Executable](../../src/rust-project-templates/1.ii.base-minimum_sized_executable) 
          - Binary size with "cargo build" command is 3.6 MB (hello world application). The generated binary contains symbols and debug info
          - compile parameters for optimization stripping (300 K, hello world application) (project-01/Cargo.toml compile paramaters)
          - non static binary, depending on other libs and rust env. (15K , hello world application) (project-02/build.sh compile paramaters)         
-    3. [Versioning and dependency management](../../src/rust-project-templates/1.iii.base-versioning_and_dependency_management) 
+    4. [Versioning and dependency management](../../src/rust-project-templates/1.iii.base-versioning_and_dependency_management) 
          - You only write direct dependencies, cargo build system will resolv sub dependencies. Similiar functionality as maven/gradle.
          - dev-dependencies only used when compiling examples, tests, benches ( e.g. : cargo build --examples )
          - "cargo tree" shows sub dependencies.
@@ -322,7 +322,7 @@ The template projects in the below list focuses only on a specific subject with 
              * log="*"  is for  >=0.0.0
              * log="1.*"  is for  >=1.0.0,  <2.0.0
              * log="1.2.*"  is for  >=1.2.0,  <1.3.0
-    4. [Rust Project Configuations](../../src/rust-project-templates/1.iv.base-rust_project_configurations)
+    5. [Rust Project Configuations](../../src/rust-project-templates/1.iv.base-rust_project_configurations)
          - If, for example, Cargo were invoked in /projects/foo/bar/baz, then the following configuration files would be probed for and unified in this order:
              * /projects/foo/.cargo/config.toml
              * /projects/.cargo/config.toml
@@ -333,13 +333,13 @@ The template projects in the below list focuses only on a specific subject with 
         - Credentials are stored in $HOME/.cargo/credentials.toml , but registry/repository urls arestored in $HOME/.cargo/config.toml file this will be explained in the next section.
         - NOTE: there is no way to override the variables in Cargo.toml using config.toml files. You should replace the key in Cargo.toml file using a linuz command before executing it.
             * For Example : perl -pi -e "s/mykey=.*/mykey=$ENVVAR/" Cargo.toml
-    5. Publishing the crate to a registry
-    6. rdlib : Rust dynamic lib with binary so.
-    7. Packaging
+    6. Publishing the crate to a registry
+    7. rdlib : Rust dynamic lib with binary so.
+    8. Packaging
         - project/platform configurations 
         - RPM 
         - DEB 
-    8. Publishing to a repository
+    9. Publishing to a repository
 2. Test
     1. Unit 
     2. Integration 
