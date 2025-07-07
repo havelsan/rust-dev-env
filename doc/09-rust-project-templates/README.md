@@ -295,6 +295,13 @@ The template projects in the below list focuses only on a specific subject with 
 1. Base
     0. Standard Rust Project Layout : [Project Layout](https://doc.rust-lang.org/cargo/guide/project-layout.html) 
         - Cargo.toml , .cargo/config.toml , src directory , tests directory (test directory for integration tests  not unit tests) ,  benches directory , examples directory
+        - The .gitignore file in the main directory of the project ( we assume this is where .git directory resides, each project has a different git repository) should contain "target/" string to prevent generated files to be commit to git. We also add *.rpm, *.deb, *.tar, *.tar.gz, *.zip entries to the .gitignore file, as shown below:
+            * target/
+            * *.rpm
+            * *.deb
+            * *.tar
+            * *.tar.gz
+            * *.zip
     1. [Debugging With Gdb : Fast Introduction](../../src/rust-project-templates/1.i.base-debuggable-executable)
         - NOTE-1: project-01/build.sh file contains gdb usage commands.
         - NOTE-2: 'cargo build' command by default places debug information intothe generated  binary, 'cargo build --release' clears debug information from the binary.

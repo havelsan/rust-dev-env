@@ -1,1 +1,6 @@
 target/
+*.rpm
+*.deb
+*.tar
+*.tar.gz
+*.zip
