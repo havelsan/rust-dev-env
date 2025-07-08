@@ -1,9 +1,10 @@
 # Preparing Services
-Aerospike,Nginx. 
+Aerospike, Nginx, Redis
 
 Note : 
   - Aerospike occupies the ports "2$UID", "3$UID", "4$UID", "5$UID"  
   - Nginx occupies the port "6$UID", with $UID=$((UID%5000))
+  - Redis occupies (the biggest occupied port) + 1
   
    
 ## Preparing Aerospike 
@@ -314,4 +315,114 @@ $NGINX_HOME/sbin/nginx -V >& $HOME/.nginx/logs/nginx.version.and.properties.log
 $NGINX_HOME/sbin/nginx -p $HOME/.nginx/ >& $HOME/.nginx/logs/$CURRENT_TIMESTAMP.log
 ```
 
+## Preparing Redis
+Redis is used as in-memory-database, cache, message-broker in some applications.
+To install Redis in development environment , there are [Ubuntu-24.04 Installation](https://redis.io/docs/latest/operate/oss_and_stack/install/build-stack/ubuntu-noble/) or [Rocky Linux 8.10 Installation ](https://redis.io/docs/latest/operate/oss_and_stack/install/build-stack/almalinux-rocky-8/) documents. We use "Ubuntu-24.04 Installation" in this document as basis and we changed the scripts to match the needs of this development environment ( movable directory, different port per user). 
+
+1. Install required libs to build the redis
+```
+sudo apt-get install -y --no-install-recommends \
+    ca-certificates \
+    wget \
+    dpkg-dev \
+    gcc \
+    g++ \
+    libc6-dev \
+    libssl-dev \
+    make \
+    git \
+    cmake \
+    python3 \
+    python3-pip \
+    python3-venv \
+    python3-dev \
+    unzip \
+    rsync \
+    clang \
+    automake \
+    autoconf \
+    libtool
+```
+
+2. Download and build
+```
+cd ~/workspace
+REDIS_VERSION=8.0.3
+wget -O redis-$REDIS_VERSION.tar.gz https://github.com/redis/redis/archive/refs/tags/$REDIS_VERSION.tar.gz
+tar xvf redis-$REDIS_VERSION.tar.gz
+export BUILD_TLS=yes
+export BUILD_WITH_MODULES=yes
+export INSTALL_RUST_TOOLCHAIN=yes
+export DISABLE_WERRORS=yes
+cd redis-$REDIS_VERSION
+make -j "$(nproc)" all
+mkdir -p $(pwd)/target
+export PREFIX=$(pwd)/target
+make install
+mkdir target/conf
+cp *.conf target/conf
+mv target $HOME/sdk/services/1.0.0/redis-8.0.3
+
+```
+
+
+3. Write $HOME/sdk/services/1.0.0/redis-8.0.3/release file
+```
+#!/bin/bash
+export REDIS_HOME=`cd \`dirname $( readlink -f $BASH_SOURCE ) \` && pwd`
+export PATH=$REDIS_HOME/bin:$PATH
+export LD_LIBRARY_PATH=$REDIS_HOME/lib:$LD_LIBRARY_PATH
+echo ">>> REDIS_HOME=$REDIS_HOME "
+```
+
+4. Write $HOME/sdk/services/1.0.0/redis-8.0.3/bin/start_redis.sh file and make it executable
+```
+#!/bin/bash
+if [ "$REDIS_HOME" = "" ]
+then
+   echo "REDIS_HOME env. variable is not set, please source the redis release file in sdk/services directory"
+   exit 1
+fi
+
+CURRENT_TIMESTAMP=$(date '+%Y%m%d%H%M%S')
+
+
+
+if [ ! -d $HOME/.redis ]
+then
+     mkdir -p $HOME/.redis
+
+     USER_PORT=$(lsof -i -n -P| cut -d: -f2 | sed -e 's/->.*//'|awk '{print $1}'| sort -n| tail -1)
+     USER_PORT_1=$(($USER_PORT+1))
+
+     cp -Rf $REDIS_HOME/conf $HOME/.redis/
+
+     perl -pi -e "s#redis.conf#$HOME/.redis/conf/redis.conf#" $HOME/.redis/conf/redis-full.conf
+     perl -pi -e "s#loadmodule ./modules/.*/#loadmodule $REDIS_HOME/lib/redis/modules/#" $HOME/.redis/conf/redis-full.conf
+     perl -pi -e "s/port .*/port $USER_PORT_1/" $HOME/.redis/conf/redis.conf
+     perl -pi -e "s#pidfile .*#pidfile $HOME/.redis/logs/pidfile.txt#" $HOME/.redis/conf/redis.conf
+
+
+     mkdir -p $HOME/.redis/logs
+fi
+
+
+echo "Configuration file is $HOME/.redis/conf/redis-full.conf"
+echo "Log file is $HOME/.redis/logs/$CURRENT_TIMESTAMP.log"
+
+cd $REDIS_HOME/bin
+
+./redis-server --version
+./redis-server $HOME/.redis/conf/redis-full.conf >& $HOME/.redis/logs/$CURRENT_TIMESTAMP.log &
+ps -ef | grep redis-server
+lsof -i -n -P| grep redis | grep $USER
+
+```
+
+
+5. Write $HOME/sdk/services/1.0.0/redis-8.0.3/bin/stop_redis.sh file and make it executable
+```
+#!/bin/bash
+pkill -U mpekmezci -9 redis-server
+```
 
