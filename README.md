@@ -1,21 +1,5 @@
 # Rust Development Environment
-This repository contains rust development environment preparation scripts and documentation.
-
-## The environment contains following components :
-
-1. Gitea Local source code repository
-2. Gitea Local crate registry
-3. Gitea Local rpm/deb repository
-4. Software Distribution Management Scripts
-5. Aerospike In Memory DB
-6. DBeaver database viewer / editor
-7. Nginx web server and tcp/udp proxy
-8. VSCode and rust extensions
-9. Rust Project/Design/Architecture Templates
-10. Rust Code Quality Tools
-11. Rust Test Scripts
-12. Debug/Monitoring Tool Scripts
-     
+This repository contains rust development environment preparation scripts, documentation, example codes and recommendations.
 
 ## Table of Contents
 
