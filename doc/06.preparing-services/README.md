@@ -1,11 +1,12 @@
 # Preparing Services
 Aerospike, Nginx, Redis
 
-Note : 
+In a development server multiple developers login and work together, so while working in a development server, every developer's aerospike/nginx/redis service should use different port.
+Port usage policy is listed below : 
   - Aerospike occupies the ports "2$UID", "3$UID", "4$UID", "5$UID"  
   - Nginx occupies the port "6$UID", with $UID=$((UID%5000))
   - Redis occupies (the biggest occupied port) + 1
-  
+These ports are managed automatically using "start scripts" explained below.
    
 ## Preparing Aerospike 
 
@@ -89,7 +90,7 @@ echo ">>>  AEROSPIKE_HOME=$AEROSPIKE_HOME "
 
 ```
 
-7. Write $AEROSPIKE_HOME/bin/start.sh file and make it executable (chmod +x $AEROSPIKE_HOME/bin/start.sh)
+7. Write $AEROSPIKE_HOME/bin/start_aerospike.sh file and make it executable (chmod +x $AEROSPIKE_HOME/bin/start_aerospike.sh)
 ```
 #!/bin/bash
 if [ "$AEROSPIKE_HOME" = "" ]
@@ -193,7 +194,7 @@ else
 fi
 ```
 
-10. Write $AEROSPIKE_HOME/bin/admin.sh file and make it executable (chmod +x $AEROSPIKE_HOME/bin/admin.sh)
+10. Write $AEROSPIKE_HOME/bin/aerospike_admin.sh file and make it executable (chmod +x $AEROSPIKE_HOME/bin/admin.sh)
 ```
 if [ ! -f $HOME/.aerospike/aerospike.conf ]
 then
@@ -378,6 +379,17 @@ echo ">>> REDIS_HOME=$REDIS_HOME "
 4. Write $HOME/sdk/services/1.0.0/redis-8.0.3/bin/start_redis.sh file and make it executable
 ```
 #!/bin/bash
+
+lsof -i -n -P| grep redis | grep $USER
+if [ $? = 0 ]
+then
+   echo "There already is a redis-server running for you"
+   echo 'You may check it with command : lsof -i -n -P| grep redis | grep $USER'
+   exit 1
+fi
+
+
+
 if [ "$REDIS_HOME" = "" ]
 then
    echo "REDIS_HOME env. variable is not set, please source the redis release file in sdk/services directory"
