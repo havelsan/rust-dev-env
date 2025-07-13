@@ -153,49 +153,7 @@ $AEROSPIKE_HOME/bin/asd --cold-start --config-file $HOME/.aerospike/aerospike.co
 
 ```
 
-8. Write $AEROSPIKE_HOME/etc/aerospike.service file ( This is not necessary for development environment , this is necessary only for test and target environments, prefereably this configuration can be made in the postinstall script of the operating system package such as rpm or deb)
-```
-[Unit]
-Description=Aerospike Server
-After=network-online.target
-Wants=network.target
-
-[Service]
-LimitNOFILE=100000
-TimeoutSec=600
-User=root
-Group=root
-#EnvironmentFile=/etc/sysconfig/aerospike
-PermissionsStartOnly=True
-ExecStart=AEROSPIKE_HOME/bin/start.sh
-
-[Install]
-WantedBy=multi-user.target
-
-```
-
-9. Configure aerospike service (this is necessary only for test and target environments)
-```
-USER_ID=$(id -u)
-if [ "$AEROSPIKE_HOME" = "" ]
-then
-   echo "Please set the AEROSPIKE_HOME env. variable ( there should be a release file within the aerospike directory, you may source it )" 
-   echo "Not configureing service"
-elif [ "$USER_ID" != "0" ]
-then
-   echo "You should be root to configure system service"   
-else
-   CURRENT_TIMESTAMP=$(date '+%Y%m%d%H%M%S')
-   mv /etc/systemd/system/aerospike.service /etc/systemd/system/aerospike.service.$CURRENT_TIMESTAMP
-   cp $AEROSPIKE_HOME/etc/aerospike.service /etc/systemd/system/
-   perl -pi -e "s#AEROSPIKE_HOME#$AEROSPIKE_HOME#" /etc/systemd/system/aerospike.service
-   systemctl enable aerospike
-   systemctl start aerospike
-   systemctl status aerospike
-fi
-```
-
-10. Write $AEROSPIKE_HOME/bin/aerospike_admin.sh file and make it executable (chmod +x $AEROSPIKE_HOME/bin/admin.sh)
+8. Write $AEROSPIKE_HOME/bin/aerospike_admin.sh file and make it executable (chmod +x $AEROSPIKE_HOME/bin/admin.sh)
 ```
 if [ ! -f $HOME/.aerospike/aerospike.conf ]
 then
@@ -217,7 +175,7 @@ $AEROSPIKE_HOME/bin/asadm/asadm -h localhost -p $USER_PORT_1
 
 ```
 
-11. Write $AEROSPIKE_HOME/bin/aql.sh file and make it executable (chmod +x $AEROSPIKE_HOME/bin/aql.sh)
+9. Write $AEROSPIKE_HOME/bin/aql.sh file and make it executable (chmod +x $AEROSPIKE_HOME/bin/aql.sh)
 ```
 if [ ! -f $HOME/.aerospike/aerospike.conf ]
 then
