@@ -6,6 +6,7 @@ Port usage policy is listed below :
   - Aerospike occupies the ports "2$UID", "3$UID", "4$UID", "5$UID"  
   - Nginx occupies the port "6$UID", with $UID=$((UID%5000))
   - Redis occupies (the biggest occupied port) + 1
+
 These ports are managed automatically using "start scripts" explained below.
    
 ## Preparing Aerospike 
