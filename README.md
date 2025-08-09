@@ -1,33 +1,23 @@
 # Rust Development Environment
-This repository contains rust development environment preparation scripts, documentation, example codes and recommendations.
+This repository contains rust development environment preparation scripts, documentation, reference projects containing codes and principles.
 
-Rust development environment is installed in $HOME/sdk directory. This sdk directory may reside in any other directory (e.g. /opt/sdk).
+## How to use this repository
 
-SDK directory contains 3 sub directories :
-1. infra :  This directory contains sub directories that are "version numbers" (e.g. /opt/sdk/infra/1.0.0/).  This "version numbered directory" contains
-- rust compiler (e.g. $HOME/sdk/infra/1.0.0/rust-1.88.0)
-- application libraries
-- APIs to services.
-- release file , sourcing all the sub directories release files.
-2. tools :
-3. services
-
-These three sub directories also
-
-
+1. Clone this repository into a directory.
+2. source the release file
+3. Go to "rust" directory and run the install.sh file
+4. [optional] Go to "devops" directory and follow the instructions in the README.md file. 
+    - Installing a local cargo registry and a local rpm/dep repository to be used in a devops chain
+    - Importing new thirdparty libraries to the local thirdparty registry.
+5. [optional] Go to "ide" directory and follow the instructions in the README.md file. ( VSCode with rust and redis extensions) 
+6. [optional] Go to "reference-projects" directory and find the subject (logging, testing, ...) in the PROJECT_LIST.md . 
 
 
 ## Table of Contents
 
-1. [Preparing Rust SDK Directory](doc/01.preparing-rust-sdk-directory/)
-2. [Preparing Local Source Code Repository](doc/02.preparing-local-source-code-repository/)  
-3. [Preparing Local Crate Registry](doc/03.preparing-local-crate-repository/)
-4. [Updating Local Thirdparty Crate Registry](doc/04.updating-local-thirdparty-crate-registry/)
-5. [Preparing Local OS Package (rpm/deb) Repository](doc/05.preparing-local-package-repository/)
-6. [Preparing Services](doc/06.preparing-services)
-7. [Preparing IDEs](doc/07.preparing-ides)
-8. [Preparing Data Tools](doc/08.preparing-data-tools)
-9. [Rust Project Templates](doc/09-rust-project-templates)
-
+1. [Rust Compiler](rust/)
+2. [Devops : Gitea GIT Repository, Cargo Registry, RPM Repository, and DEB Repository](devops/)  
+3. [IDE    : VSCode Rust Extensions (Also Redis Extensions) ](ide/)
+4. [Reference Projects : This directory contains single-purpose targeted rust projects](reference-projects/)
 
 

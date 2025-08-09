@@ -1,0 +1,13 @@
+#!/bin/bash
+
+export RUST_DEV_ENV=`cd \`dirname $( readlink -f $BASH_SOURCE ) \` && pwd`
+
+cd $RUST_DEV_ENV
+
+for i in *
+do 
+   if [ -f $i/release ]
+   then
+      source $i/release 
+   fi
+done
