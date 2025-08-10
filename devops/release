@@ -1,0 +1,6 @@
+#!/bin/bash
+export GITEA_HOME=`cd \`dirname $( readlink -f $BASH_SOURCE ) \` && pwd`
+export PATH=$PATH:$GITEA_HOME/bin
+echo ">>> GITEA_HOME=$GITEA_HOME "
+
+

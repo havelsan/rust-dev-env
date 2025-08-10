@@ -1,20 +1,15 @@
-# Prepare Gitea Source Code Repository
+# Prepare Gitea Source Code / Crate / RPM / DEB  Repository
 
-1. Download gitea from hhttps://dl.gitea.com/gitea/
-   for example :  wget --no-check-certificate  https://dl.gitea.com/gitea/1.22.4/gitea-1.22.4-linux-amd64.xz
-2. run the "cd ../../src/prepare-env-scripts/; ./02.prepare.gitea.source.repo.sh 1.22.4 linux-amd64 ./gitea.app.ini" command
-
-3. NOTE: if the main ditectory of the gitea changes , all the following variables in the $GITEA_HOME/custom/conf/app.ini file should be changed accordingly. 
-   - WORK_PATH = GITEA_HOME
-   - PATH = GITEA_HOME/data/gitea.db
-   - ROOT = GITEA_HOME/data/gitea-repositories
-   - APP_DATA_PATH = GITEA_HOME/data
-   - PATH = GITEA_HOME/data/lfs
-   - ROOT_PATH = GITEA_HOME/log
-
-4. "cd $GITEA_HOME; ./run.sh"
-
-5. Goto http://localhost:3000/ adress and create the admin user :
+1. Run install.sh in the current directory
+```
+./install.sh
+```
+2. Run run_gitea.sh found in the bin directory
+```
+cd bin
+./run_gitea.sh &
+```
+3. Goto http://localhost:3000/ adress and create the admin user :
    - Click on the "Register" link found on the left top of the page.
    - username= adm001, email=adm001@localhost.com, password=adm001+++
    - NOTE : email and ldap configurations will not be covered in this tutorial. So we used a fake email adress for admin001
@@ -23,9 +18,7 @@
    
 
 
-# Prepare Local Crate Repository
-
-0. run the gitea start script : cd $HOME/sdk/tools/1.0.0/gitea-1.22.4 && ./run.sh
+## Prepare Local Crate Registry
 
 1. sudo apt-get install libssl-dev
    
@@ -33,7 +26,7 @@
 
 3. goto http://localhost:3000
 
-4. login using adm001 (this user was created in step "Preparing Local Source Code Repository")
+4. login using adm001 
 
 5. create an organization with the name "cargo-test" 
    - click on the "+" sign on the right-top of the page
@@ -125,7 +118,7 @@ token = "Bearer 401e7c68f09e4e10ad483ba97a50c84086eedb25"
     
 11. test the access :
 - create a rust project :
- + source $HOME/sdk/infra/1.0.0/release
+ + source rust-dev-env/release
  + mkdir -p $HOME/workspace
  + cd $HOME/workspace
  + cargo new hello_cargo
@@ -133,69 +126,26 @@ token = "Bearer 401e7c68f09e4e10ad483ba97a50c84086eedb25"
  + Enter 'publish = ["cargo-prod","cargo-test"] ' under the " [package] " section of the  Cargo.toml file.
  + cargo package --allow-dirty
  + cargo publish --registry=cargo-test  --allow-dirty
- + The above command should write "Uploaded hello_cargo v0.1.0 to registry cargo-test" in the end. 
+ + The above command prints "Uploaded hello_cargo v0.1.0 to registry cargo-test" text in the end. 
  + cargo yank --registry=cargo-test --version 0.1.0 # this command deletes the previously uploaded package from the cargo-test registry, yoou should also give the version!
  
  
-# Updating Local Thirdparty Crate Registry
+## Updating Local Thirdparty Crate Registry
 
-
-## Download the crates using a machine connected to internet :
-
-1. Use always the same linux account to download the crates, so that every admin will connect to the same account and accumulate the previously downloaded crates.
-2. ssh to a machine which has internet connection.
-3. In that account, ONLY for the first time, run the following steps (if you already executed the following steps, you may ommit this step): 
- - if you not already did, do the steps in "01.preparing-rust-sdk-directory" and source the release "source $HOME/sdk/infra/1.0.0/release"
- - if you are behind a proxy run the "cd ../../src/prepare-env-scripts/; ./04.configure.proxy.sh "
- - Prepare an empty rust project dir:
-   + mkdir -p $HOME/download-crates
-   + cd $HOME/download-crates
-   + cargo init
-4. run command : "source $HOME/release.proxy" if you are behind a proxy. (release.proxy file is created by 04.configure.proxy.sh script)
-5. cd $HOME/download-crates
-6. mkdir -p backup
-7. cp Cargo.toml backup/Cargo.toml.$(date '+%Y%m%d%H%M%S')
-8. Remove previous dependencies:
-  - run the script "cd ../../src/prepare-env-scripts/; 04.clean.previous.dependencies.sh"
-6. For each module and its version write the followwing command
- - cargo add --registry=crates-io <module>@<version> # for example : cargo add --registry=crates-io serde@1.0.100
- - cargo update -p <module> --precise <version> # for example : cargo update -p serde --precise 1.0.100
-7. Download using the following command :
- - cargo fetch
-
-
-## Pack all the downloaded crates (libraries) and copy to a intranet computer
-
-1. run the script "cd ../../src/prepare-env-scripts/; ./04.pack.all.downloaded.in.this.day.sh " 
-  - This script makes a tar.gz package of all the modules downloaded in the same day. and copies it to $HOME/creates directory. 
-2. copy the $HOME/crates/crates.$(date '+%Y%m%d').tar.gz file to a intranet computer into the directory __$HOME/import_crates__
-  - NOTE-1: crates.20241209.tar.gz means the packages of creates which are downloaded in 9 December 2024
-  - NOTE-2: we assume local repository is found in the intranet. 
-
-
-## UnPack the last copied tar.gz file and upload to cargo-thirdparty local repository
-
-0. This step of installation should be made by someone who has write access to cargo-thirdparty repository.
-1. run the script "cd ../../src/prepare-env-scripts/; ./04.unpack.and.upload.to.local.cargo-thirdpaty.registry.sh " 
-
-Any of the crate publish (cargo-thirdparty registry) may fail with the following messsage, as it is written, this is because the crate already exists, no need to panic :)
- 
+1. If you are behind a company proxy, run the following commands:
 ```
-error: failed to publish to registry at http://localhost:3000/api/packages/cargo-thirdparty/cargo
-
-Caused by:
-  the remote server responded with an error (status 409 Conflict): package version already exists
+source ./release.proxy
 ```
 
- 
-
-# Preparing Local OS Package (rpm/deb) Repository
-
+2. Download thirdparty crates from crate-io and upload it to local thirdparty registry :
+```
+update_thirdparty_gitea.sh <Cargo.toml file>
+```
 
 ## Preparing RPM Repositories
 
 
-0. run the gitea start script : cd $HOME/sdk/tools/1.0.0/gitea-1.22.4 && ./run.sh
+0. if GITEA is not already running, "cd rust-dev-env/devops/bin; ./run_gitea.sh"
 
 1. goto http://localhost:3000
 
@@ -322,7 +272,7 @@ dnf repository-packages gitea-rpm-test-TARGET_PLATFORM_GROUP-TARGET_PLATFORM-1.0
 
 ## Preparing Debian (deb) Repositories
 
-0. run the gitea start script : cd $HOME/sdk/tools/1.0.0/gitea-1.22.4 && ./run.sh
+0. if GITEA is not already running, "cd rust-dev-env/devops/bin; ./run_gitea.sh"
 
 1. goto http://localhost:3000
 

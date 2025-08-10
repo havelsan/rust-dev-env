@@ -1,0 +1,34 @@
+echo "proxy url (e.g. proxy01.company.net:8080):"
+read PROXY_URL
+alias wget='wget --no-check-certificate'
+echo "password for username $USERNAME : ( we read silently , no print to console) "
+read -s PASSWORD
+export http_proxy='http://$USERNAME:\$PASSWORD@$PROXY_URL/'
+export https_proxy=$http_proxy
+wget www.google.com
+rm index.html*
+git config --global http.proxy $http_proxy
+git config --global http.sslVerify false
+git config --global http.proxyAuthMethod 'basic'
+
+mkdir -p $HOME/.cargo
+
+grep cainfo  $HOME/.cargo/config.toml >/dev/null
+if [ $? != 0 ]
+    then
+
+     echo 'openssl s_client -showcerts -connect www.google.com:443 </dev/null'
+     (
+       openssl s_client -showcerts -connect www.google.com:443 </dev/null | sed -n -e '/-.BEGIN/,/-.END/ p' > ~/.cargo/certs.pem
+     )>&/dev/null
+
+     echo '
+[http]
+check-revoke=false
+timeout=60
+multiplexing = false
+cainfo=".cargo/certs.pem"
+      ' >> $HOME/.cargo/config.toml
+
+fi
+

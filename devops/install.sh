@@ -1,67 +1,54 @@
+#!/bin/bash
 
-if [ $# -lt 2 ]
+if [ ! -f ./release ]
 then
-  GITEA_VERSION=1.24.2
-  GITEA_OS_ARCH=linux-amd64
-  GITEA_APP_INI_FILE=./gitea.app.ini
+	echo "Please run this script within its own directory : ./install.sh"
+	exit 1
 else
-  GITEA_VERSION=$1
-  GITEA_OS_ARCH=$2
-  GITEA_APP_INI_FILE=$3
-fi
-
-if [ ! -f $GITEA_APP_INI_FILE ]
-then
-   echo "please go into the directory that conntains the file $GITEA_APP_INI_FILE"
-   echo "quiting..."
-   exit 1
+        grep GITEA_HOME release > /dev/null
+	if [ $? != 0 ]
+	then
+	    echo "release file in this directory does not contain GITEA_HOME variable"
+	    exit 1
+	fi
 fi
 
 
-export GITEA_HOME=$HOME/sdk/tools/1.0.0/gitea-$GITEA_VERSION/
-rm -Rf $GITEA_HOME
-mkdir -p $GITEA_HOME/custom/conf
-mkdir -p $GITEA_HOME/data/gitea-repositories
-mkdir -p $GITEA_HOME/data/lfs
-mkdir -p $GITEA_HOME/log
+wget --no-check-certificate https://dl.gitea.com/gitea/
+GITEA_VERSION=$(grep 'href="/gitea/' index.html | head -1| sed -e 's#.*href="/gitea/##'| sed -e 's#/.*##' | sed -e 's#".*##')
+rm -f index.html*
 
-cp ./gitea.app.ini $GITEA_HOME/custom/conf/app.ini
-#cp ./gitea.db $GITEA_HOME/data
+GITEA_OS_ARCH=linux-amd64
+GITEA_APP_INI_FILE=./gitea.app.ini
 
-perl -pi -e "s/GITEA_RUN_USER/$USER/g" $GITEA_HOME/custom/conf/app.ini
-perl -pi -e "s#GITEA_HOME#$GITEA_HOME#g" $GITEA_HOME/custom/conf/app.ini
+source ./release
+
+mkdir -p bin
+mkdir -p custom/conf
+mkdir -p data/gitea-repositories
+mkdir -p data/lfs
+mkdir -p log
+
+mv ./gitea.app.ini custom/conf/app.ini.default
+cp custom/conf/app.ini.default custom/conf/app.ini
+
+perl -pi -e "s/GITEA_RUN_USER/$USER/g" custom/conf/app.ini
+perl -pi -e "s#GITEA_HOME#$GITEA_HOME#g" custom/conf/app.ini
  
-mkdir -p $HOME/tmp
-cd $HOME/tmp
-if [ ! -f  gitea-$GITEA_VERSION-$GITEA_OS_ARCH*.xz* ]
-then
-    wget --no-check-certificate https://dl.gitea.com/gitea/$GITEA_VERSION/gitea-$GITEA_VERSION-$GITEA_OS_ARCH.xz
-fi
+wget --no-check-certificate https://dl.gitea.com/gitea/$GITEA_VERSION/gitea-$GITEA_VERSION-$GITEA_OS_ARCH.xz
 xz -d -v gitea-$GITEA_VERSION-$GITEA_OS_ARCH.xz
 chmod +x gitea-$GITEA_VERSION-$GITEA_OS_ARCH
 
-
-
-
-mv gitea-$GITEA_VERSION-$GITEA_OS_ARCH $GITEA_HOME
-
-cd $GITEA_HOME
-
 rm -f gitea_executable
 ln -s gitea-$GITEA_VERSION-$GITEA_OS_ARCH gitea_executable
+mv gitea-$GITEA_VERSION-$GITEA_OS_ARCH gitea_executable bin
 
-echo '#!/bin/bash
-export GITEA_HOME=`cd \`dirname $( readlink -f $BASH_SOURCE ) \` && pwd`
-export PATH=$PATH:$GITEA_HOME/
-
-echo ">>> GITEA_HOME=$GITEA_HOME "
-'  >release
-
-echo '#!/bin/bash
-cd $GITEA_HOME
-nohup ./gitea_executable >& $GITEA_HOME/log/gitea.run.log &
-' > run.sh
 chmod +x run.sh
+mv run.sh bin/run_gitea.sh
+
+chmod +x update.sh
+mv update.sh bin/update_thirdparty_gitea.sh
+
 
 
 
