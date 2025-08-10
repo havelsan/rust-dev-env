@@ -1,0 +1,5 @@
+#!/bin/bash
+export VSCODE_HOME=`cd \`dirname $( readlink -f $BASH_SOURCE ) \` && pwd`/VSCode-linux-x64
+export PATH=$PATH:$VSCODE_HOME
+echo ">>> VSCODE_HOME=$VSCODE_HOME "
+
