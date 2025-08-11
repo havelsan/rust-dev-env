@@ -21,8 +21,15 @@ cd bin
 ## Prepare Local Crate Registry
 
 1. sudo apt-get install libssl-dev
-   
+
+2. Clean previous $HOME/.cargo directory :
+```
+mv $HOME/.cargo $HOME/_.cargo
+```
+
 2. cargo install cargo-local-registry
+   NOTE: "error: config.json not found in registry" means, you did not do the previous step :)
+
 
 3. goto http://localhost:3000
 
