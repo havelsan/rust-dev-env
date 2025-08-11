@@ -5,9 +5,4 @@ This section contains rust directory preparation scripts
 ```
 ./install.sh 
 ```
-2. Source the "release" file to use the rust compiler.  
-```
-source ./release
-```
-   
  
