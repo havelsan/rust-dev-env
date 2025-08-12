@@ -19,8 +19,9 @@ include = ["/src", "COPYRIGHT", "/examples", "!/examples/big_example"]
 ## used while compiling with  "cargo build" , "cargo build --release"
 [dependencies]
 time = "0.1.12"
-regex = "0.1.41"
-
+regex = "1.8.*"
+#regex="1.11.*"
+log="0.4.*"
 
 ## used while compiling with "cargo build --tests", "cargo build --benches", "cargo build --examples"
 [dev-dependencies]
