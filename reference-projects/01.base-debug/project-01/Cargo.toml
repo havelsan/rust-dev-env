@@ -20,4 +20,7 @@ include = ["/src", "COPYRIGHT", "/examples", "!/examples/big_example"]
 [dependencies]
 
 
+## used while compiling with "cargo build --tests", "cargo build --benches", "cargo build --examples"
+[dev-dependencies]
+serde = "0.9"
 

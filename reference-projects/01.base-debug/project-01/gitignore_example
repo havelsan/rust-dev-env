@@ -1,0 +1,8 @@
+target/
+*.rpm
+*.deb
+*.tar
+*.tar.gz
+*.zip
+*.swp
+*.lock
