@@ -92,13 +92,11 @@ mv $HOME/.cargo $HOME/_.cargo
     Also create a team for this organization and team member will be cargo-test-access. (Step 8, Configure authorization for cargo-test organization )
 
 11. Configure cargo-test, cargo-thirdparty and cargo-prod registries in the developers home directory and configure write access to cargo-test registry:
-- Write the following into the $HOME/.cargo/config.toml file. ** NOTE: change localhost to your hostname accordingly :) **
+- Write the following into the $HOME/.cargo/config.toml file. ** NOTE: change localhost to your hostname accordingly :) **, **DO NOT MAKE THIS CONFIGURATION ON THE INTERNET MACHINE WHERE YOU DOWNLOAD CRATES , THIS CONFIGURATION MUST BE DONE IN AN INTRANET MACHINE THAT HAS NO DIRECT INTERNET ACCESS**
 ```
 [registry]
 default = "cargo-prod"
 
-[registries.crates-io]
-index = "sparse+https://index.crates.io/" # Sparse index
 
 [registries.cargo-prod]
 index = "sparse+http://localhost:3000/api/packages/cargo-prod/cargo/" # Sparse index
@@ -109,8 +107,21 @@ index = "sparse+http://localhost:3000/api/packages/cargo-test/cargo/" # Sparse i
 [registries.cargo-thirdparty]
 index = "sparse+http://localhost:3000/api/packages/cargo-thirdparty/cargo/" # Sparse index
 
+[registries.crates-io]
+index = "sparse+https://index.crates.io/" # Sparse index
+
+
 [net]
 git-fetch-with-cli = true
+
+### START : FOR INTRANET COMPUTERS
+[source.crates-io]
+replace-with = "cargo-thirdparty"
+
+[source.cargo-thirdparty]
+registry="http://localhost:3000/cargo-thirdparty/_cargo-index.git"
+
+### END : FOR INTRANET COMPUTERS
 
 ```
  
@@ -379,4 +390,14 @@ grep ^Package: /var/lib/apt/lists/localhost:3000_api_packages_deb-test_debian_di
   curl --user adm001:401e7c68f09e4e10ad483ba97a50c84086eedb25 -X DELETE http://localhost:3000/api/packages/deb-test/debian/pool/TARGET_PLATFORM_GROUP-TARGET_PLATFORM-1.0.0/main/testpkg/1.0.0-1/amd64
 ```
 
+
+## NOTES :
+Configuration Hierarchy:
+
+$HOME/projects/foo/bar/baz/.cargo/config.toml
+$HOME/projects/foo/bar/.cargo/config.toml
+$HOME/projects/foo/.cargo/config.toml
+$HOME/projects/.cargo/config.toml
+$HOME/.cargo/config.toml
+$CARGO_HOME/config.toml which defaults to $HOME/.cargo/config.toml
 
