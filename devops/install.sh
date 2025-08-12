@@ -49,6 +49,9 @@ mv run.sh bin/run_gitea.sh
 chmod +x update.sh
 mv update.sh bin/update_thirdparty_gitea.sh
 
+mv download*.sh bin/
+mv import*.sh bin/
+
 
 
 

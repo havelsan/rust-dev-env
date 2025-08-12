@@ -27,7 +27,7 @@ cd bin
 mv $HOME/.cargo $HOME/_.cargo
 ```
 
-2. cargo install cargo-local-registry
+2. cargo install cargo-local-registry --registry crates-io
    NOTE: "error: config.json not found in registry" means, you did not do the previous step :)
 
 
@@ -89,6 +89,7 @@ mv $HOME/.cargo $HOME/_.cargo
 - Do all of the steps above for also the cargo-prod-access user.
 
 10. create also cargo-thirdparty organization and crate registry within it. We will use this repository for all libs downloaded from internet.
+    Also create a team for this organization and team member will be cargo-test-access. (Step 8, Configure authorization for cargo-test organization )
 
 11. Configure cargo-test, cargo-thirdparty and cargo-prod registries in the developers home directory and configure write access to cargo-test registry:
 - Write the following into the $HOME/.cargo/config.toml file. ** NOTE: change localhost to your hostname accordingly :) **
@@ -118,10 +119,15 @@ git-fetch-with-cli = true
 [registries.cargo-test]
 token = "Bearer 17e5616bf481c9f46350312ba533edfc8d383806"
 
+[registries.cargo-prod]
+token = "Bearer 7e8151d93523ec30ffe1d00862747ca80a96320c"
+
 [registries.cargo-thirdparty]
-token = "Bearer 401e7c68f09e4e10ad483ba97a50c84086eedb25"
+token = "Bearer 17e5616bf481c9f46350312ba533edfc8d383806"
 
 ```
+- CAUTION : Do not supply the access token for the prod repository to a non-admin developer. This access token should only be used by devops scripts, admin-developers or devops staff.
+- NOTE : Thirdparty repository may be accessed via cargo-test-access user.
     
 11. test the access :
 - create a rust project :
@@ -146,8 +152,13 @@ source ./release.proxy
 
 2. Download thirdparty crates from crate-io and upload it to local thirdparty registry :
 ```
-update_thirdparty_gitea.sh <Cargo.toml file>
+download_crates.sh <Cargo.toml file>
 ```
+
+3. Copy the $HOME/crates.*.tar.gz file to the computer that has access to your local registry.
+
+4. 
+
 
 ## Preparing RPM Repositories
 
@@ -164,7 +175,7 @@ update_thirdparty_gitea.sh <Cargo.toml file>
    - Organization Name= "rpm-test", visibility = "Public" , Permissions = "Reposiroty Admin ..." is selected.
    - click on "Create Organization"
    - Create new team in this organization with "all repositories" and "create repositories" authozation, and code and packages write access. 
-   - For only rpm-test organization : add usr001, or any other developer's account to this team, so that developers may freely upload their rpm to rpm-test organization's package repository. 
+   - For only rpm-test organization : add usr001 (or use cargo-test-access) , or any other developer's account to this team, so that developers may freely upload their rpm to rpm-test organization's package repository. 
    - You may also map ldap groups to the teams (https://forum.gitea.com/t/map-ldap-groups-to-organization-teams/6385/3)
 
 4. We don't have to do anything more to create rpm repository, the url http://localhost:3000/api/packages/rpm-test/rpm/upload and other services immediately become available when you create the rpm-test organization in gitea.
@@ -234,7 +245,7 @@ ORG-LIST-END-MARKER
   - "cd ~/rpmbuild/RPMS/x86_64/"
 3. Upload generated rpm to the repository
   - By using the following curl command, we upload directly to http://localhost:3000/api/packages/rpm-test/rpm/TARGET_PLATFORM_GROUP-TARGET_PLATFORM-1.0.0 url. We don't need to create any directory, this directory becomes immediately available after the first package upload.
-  - "curl --user adm001:<adm001_token_created_in_settings_applications> --upload-file hello-2.8-1.x86_64.rpm http://localhost:3000/api/packages/rpm-test/rpm/TARGET_PLATFORM_GROUP-TARGET_PLATFORM-1.0.0/upload"
+  - "curl --user cargo_test_access:<cargo_test_access_token_created_in_settings_applications> --upload-file hello-2.8-1.x86_64.rpm http://localhost:3000/api/packages/rpm-test/rpm/TARGET_PLATFORM_GROUP-TARGET_PLATFORM-1.0.0/upload"
   - TARGET_PLATFORM_GROUP is generally the customer name, or categorical name of the platform in the literature (e.g. ship, plane, car ...), or any logical categorization name you may give.
   - TARGET_PLATFORM is the physical name of the environment for deployment. (e.g. datacenter01, or ship_no_05, or airplane_no_125, ...)
   - 1.0.0 is the version of that platform. 
@@ -261,11 +272,11 @@ dnf repository-packages gitea-rpm-test-TARGET_PLATFORM_GROUP-TARGET_PLATFORM-1.0
 
 5. Installing the "hello" rpm form the repository
   - Do the configureations shown in second part of the "step 4". (yum repository configurations)
-  - "dns install hello"
+  - "dnf install hello"
 
 6. Deleting package from the repository 
   - You may delete the rpm packages from the web user interface : 
-   * goto http://localhost:3000/rpm-test/-/packages (login using adm001 admin user)
+   * goto http://localhost:3000/rpm-test/-/packages (login using adm001 or cargo_test_access admin user)
    * click on the "hello" package
    * click on the "2.8-1" version,  on the right most panel.
    * click on the settings,  on the right most panel.
@@ -331,7 +342,7 @@ chown -Rf maintain:staff /opt/testpkg
 
 2. Upload generated deb package to the repository
   - By using the following curl command, we upload directly to http://localhost:3000/api/packages/deb-test/debian/pool/TARGET_PLATFORM_GROUP-TARGET_PLATFORM-1.0.0/main/upload url. We don't need to create any directory, this directory becomes immediately available after the first package upload.
-  - "curl --user usr001:<usr001_token_created_in_settings_applications> --upload-file testpkg.deb http://localhost:3000/api/packages/deb-test/debian/pool/TARGET_PLATFORM_GROUP-TARGET_PLATFORM-1.0.0/main/upload"
+  - "curl --user cargo_test_access:<cargo_test_access_token_created_in_settings_applications> --upload-file testpkg.deb http://localhost:3000/api/packages/deb-test/debian/pool/TARGET_PLATFORM_GROUP-TARGET_PLATFORM-1.0.0/main/upload"
   - TARGET_PLATFORM_GROUP is generally the customer name, or categorical name of the platform in the literature (e.g. ship, plane, car ...), or any logical categorization name you may give.
   - TARGET_PLATFORM is the physical name of the environment for deployment. (e.g. datacenter01, or ship_no_05, or airplane_no_125, ...)
   - 1.0.0 is the version of that platform. 
