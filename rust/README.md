@@ -5,4 +5,5 @@ This section contains rust directory preparation scripts
 ```
 ./install.sh 
 ```
- 
+
+2. You can find extensive rust documents in share/doc directory. 
