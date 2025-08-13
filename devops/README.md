@@ -22,9 +22,9 @@ cd bin
 
 1. sudo apt-get install libssl-dev
 
-2. Clean previous $HOME/.cargo directory :
+2. Clean previous $CARGO_HOME directory :
 ```
-mv $HOME/.cargo $HOME/_.cargo
+rm -Rf $CARGO_HOME/*
 ```
 
 2. cargo install cargo-local-registry --registry crates-io
@@ -92,7 +92,7 @@ mv $HOME/.cargo $HOME/_.cargo
     Also create a team for this organization and team member will be cargo-test-access. (Step 8, Configure authorization for cargo-test organization )
 
 11. Configure cargo-test, cargo-thirdparty and cargo-prod registries in the developers home directory and configure write access to cargo-test registry:
-- Write the following into the $HOME/.cargo/config.toml file. ** NOTE: change localhost to your hostname accordingly :) **, **DO NOT MAKE THIS CONFIGURATION ON THE INTERNET MACHINE WHERE YOU DOWNLOAD CRATES , THIS CONFIGURATION MUST BE DONE IN AN INTRANET MACHINE THAT HAS NO DIRECT INTERNET ACCESS**
+- Write the following into the $CARGO_HOME/config.toml file. ** NOTE: change localhost to your hostname accordingly :) **, **DO NOT MAKE THIS CONFIGURATION ON THE INTERNET MACHINE WHERE YOU DOWNLOAD CRATES , THIS CONFIGURATION MUST BE DONE IN AN INTRANET MACHINE THAT HAS NO DIRECT INTERNET ACCESS**
 ```
 [registry]
 default = "cargo-prod"
@@ -125,7 +125,7 @@ registry="http://localhost:3000/cargo-thirdparty/_cargo-index.git"
 
 ```
  
-- write the access token previously generated access token to the file $HOME/.cargo/credentials.toml, **NOTE: 17e5616bf481c9f46350312ba533edfc8d383806 string should be replaced by what ever cargo-test access token is gernerated by you :)**
+- write the access token previously generated access token to the file $CARGO_HOME/credentials.toml, **NOTE: 17e5616bf481c9f46350312ba533edfc8d383806 string should be replaced by what ever cargo-test access token is gernerated by you :)**
 ```
 [registries.cargo-test]
 token = "Bearer 17e5616bf481c9f46350312ba533edfc8d383806"
