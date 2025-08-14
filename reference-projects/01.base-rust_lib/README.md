@@ -28,10 +28,12 @@ export PATH=$PROTOC_HOME/bin:$PATH
 
 ```
 cd project-01
-cargo package --allow-dirty
-argo publish --registry=cargo-test  --allow-dirty
+cargo build
+cargo publish --registry=cargo-test  --allow-dirty
 ```
-## use proto in project-01 from project-02 service
-```
-cd project-02
+after running these commands , you should see the uploaded package "project-01" on the page "http://localhost:3000/cargo-test/-/packages"
+IMPOTANT NOTE: you have to indicate the generated grpc code in the lib.rs file as "pub mod PROTO_FILE_NAME" like "pub mod helloworld" .
 
+## use proto in project-01 from project-02 service
+We used the proto library "project-01" in server project (project-02) and client project (project-03).
+To use the project-01 in those projects we put dependency in the Cargo.toml file and used in server.rs and client.rs as "use project_01::helloworld:: ...." 
