@@ -1,0 +1,31 @@
+[package]
+name = "project-01"
+version = "0.1.0"
+edition = "2024"
+publish = ["cargo-prod","cargo-test"]
+license = "GPL"
+description = "PROJECT-01"
+[dependencies]
+
+[package.metadata.generate-rpm]
+assets = [
+    { source = "target/release/project-01", dest = "/opt/project-01/bin/project-01", mode = "755" },
+    { source = "etc/project-01.toml", dest = "/opt/project-01/etc/project-01.toml", mode = "644" },
+    { source = "etc/release", dest = "/opt/project-01/release", mode = "644" },
+]
+
+[package.metadata.deb]
+maintainer = "Mehmet Pekmez <m@gmail.com>"
+copyright = "Havelsan"
+license-file = ["LICENSE", "4"]
+extended-description = """\
+No Description \
+At ALL."""
+depends = "$auto"
+section = "utility"
+priority = "optional"
+assets = [
+    [ "target/release/project-01", "/opt/project-01/bin/project-01", "755" ],
+    [ "etc/project-01.toml",  "/opt/project-01/etc/project-01.toml", "644" ],
+    [ "etc/release",  "/opt/project-01/release", "644" ],
+]

@@ -1,5 +1,6 @@
 # LIBRARY EXAMPLE
 
+- We make a demostration of rust library usage as grpc microservice architecture.
 - We will use [GRPC](https://github.com/hyperium/tonic/tree/master/examples) to communicate api (lib) and service.
 - project-01 (LIB) : The project is api interface project that supplies the api to reach the related service.
     - "cargo new service_api_01 --lib" command creates service_api_01 directory with Cargo.toml and src/lib.rs example files inside.

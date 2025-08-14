@@ -44,7 +44,9 @@ The reference projects in the below list focuses only on a specific subject with
         - project-03 (CLIENT-APPLICATION):  This project uses service_api_01 to reach the service_01 service.
         - Create a starter script to test all.
     - [ Packaging ](./01.base-packaging)
-        - project/platform configurations 
+        - Before starting we add  cargo rpm and deb plugin using "cargo install cargo-generate-rpm --registry crates-io"  and "cargo install cargo-deb --registry crates-io"
+        - NOTE: To view build.rs outputs, build with -vv parameter : "cargo build -vv"
+        - platform-group / platform configurations 
         - RPM 
         - DEB 
         - Publishing DEB and RPM packages 

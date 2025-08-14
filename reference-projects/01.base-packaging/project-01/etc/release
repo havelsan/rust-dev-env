@@ -1,0 +1,4 @@
+#!/bin/bash
+
+export PROJECT_01_HOME=`cd \`dirname $( readlink -f $BASH_SOURCE ) \` && pwd`
+
