@@ -1,11 +1,13 @@
+//extern crate project_01;
+
 use tonic::{transport::Server, Request, Response, Status};
 
-use hello_world::greeter_server::{Greeter, GreeterServer};
-use hello_world::{HelloReply, HelloRequest};
+use project_01::helloworld::greeter_server::{Greeter, GreeterServer};
+use project_01::helloworld::{HelloReply, HelloRequest};
 
-pub mod hello_world {
-    tonic::include_proto!("helloworld");
-}
+//pub mod hello_world {
+//    tonic::include_proto!("helloworld");
+//}
 
 #[derive(Default)]
 pub struct MyGreeter {}
@@ -18,7 +20,7 @@ impl Greeter for MyGreeter {
     ) -> Result<Response<HelloReply>, Status> {
         println!("Got a request from {:?}", request.remote_addr());
 
-        let reply = hello_world::HelloReply {
+        let reply = HelloReply {
             message: format!("Hello {}!", request.into_inner().name),
         };
         Ok(Response::new(reply))
