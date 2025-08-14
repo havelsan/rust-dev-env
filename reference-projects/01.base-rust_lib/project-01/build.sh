@@ -1,4 +1,4 @@
 cargo build
-cargo package
-cargo publish --registry cargo-test
+cargo package --allow-dirty
+cargo publish --allow-dirty --registry cargo-test
 
