@@ -24,4 +24,14 @@ export PATH=$PROTOC_HOME/bin:$PATH
 ' > release
 ```
 
+## publish project-01 crate
+
+```
+cd project-01
+cargo package --allow-dirty
+argo publish --registry=cargo-test  --allow-dirty
+```
+## use proto in project-01 from project-02 service
+```
+cd project-02
 
