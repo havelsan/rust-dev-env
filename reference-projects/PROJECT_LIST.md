@@ -68,7 +68,11 @@ The reference projects in the below list focuses only on a specific subject with
             - "cargo install cargo-tarpaulin --registry crates-io" installed tarpaulin code coverage tool.
             - "cargo tarpaulin" indicated in the build.sh file runs coverage. 
             - NOTE: if the program has some failing test functions, tarpaulin sometimes may not be able to determine he coverage.
+        - Documentation tests 
+            - Code blocks in documentation are automatically tested when running the regular cargo test command.
+            - We wont be showing a case for this testing method.
         - Integration tests (project-03)
+            - Cargo looks for integration tests in tests directory next to src.
             - tests codes resides in the "tests" directory, other than "src" directory.
         - Fuzz Tests (project-04)
         - Test Code Generation  
