@@ -33,7 +33,7 @@ The reference projects in the below list focuses only on a specific subject with
              - $CARGO_HOME/config.toml which defaults to $HOME/.cargo/config.toml
         - If a key is specified in multiple config files, the values will get merged together. 
              - The deeper config directory taking precedence over ancestor directories
-        - Credentials are stored in $HOME/.cargo/credentials.toml , but registry/repository urls are stored in $HOME/.cargo/config.toml file. This is explained in the [devops](../devops) section.
+        - Credentials are stored in $CARGO_HOME/credentials.toml , but registry/repository urls are stored in $CARGO_HOME/config.toml file. This is explained in the [devops](../devops) section.
         - NOTE: there is no way to override the variables in Cargo.toml using config.toml files. You should replace the key in Cargo.toml file using a linux command before executing it.
         - **We intentionally created project-01/.cargo/config.toml file and set the rustc variable as "rustc1" to let you know we can compile with another compiler per project.**
     - [Rust Library Project](./01.base-rust_lib)
@@ -46,44 +46,47 @@ The reference projects in the below list focuses only on a specific subject with
     - [ Packaging ](./01.base-packaging)
         - Before starting we add  cargo rpm and deb plugin using "cargo install cargo-generate-rpm --registry crates-io"  and "cargo install cargo-deb --registry crates-io"
         - NOTE: To view build.rs outputs, build with -vv parameter : "cargo build -vv"
-        - platform-group / platform configurations 
-        - RPM 
-        - DEB 
-        - Publishing DEB and RPM packages 
+        - build.sh file in the project-01 does the following :
+             - platfrm-group / platform configurations (link to related PLATFORMs)
+             - compile project
+             - generate RPM and DEB packages.
+             - upload them to local rpm / deb repository ( You may check it : http://localhost:3000/rpm-test/-/packages/) 
     - [ Code Quality ](./01.base-code_quality)
         - Clippy
-2. Test
-    - Unit 
-    - Integration 
-    - Fuzz 
-    - Scenario 
-    - Test code generation
-    - Selenium tests 
-    - Test driven development 
-    - Data driven test 
-    - Tackle-test
-    - codet5
-3. Log4rs 
-    - Log usage templates 
-    - log redirection to LogServer 
-    - Probe placement strategies
-4. Web
+        - Compiling but smelling code snipptets are taken from https://rust-lang.github.io/rust-clippy/master/index.html and pasted into project-01/src/main.rs
+        - build.sh in project-01 directory contains "cargo build" and "cargo clippy" commands"
+        - clippy comes wiithin the rust distribution.
+    - [ Test ](./01.base-test)
+        - Unit Tests (project-01)
+            - unit tests are located in the same rs file (in the "mod tests" section at the end of the file)
+            - a part of test code may be ignored by putting "#[ignore]" above the function name. 
+            - build.sh contains "cargo build" and "cargo test" and "cargo test -- --ignored" to run test.
+            - one of the tests (bad_add) left failed intentionally to let you see the mechanism.
+            - Panics may also be tested using "should_panic" directive.
+            - dependencies that are only for test code may be indicated in "[dev-dependencies]"  section in the Cargo.toml (e.g. pretty_assertions in project-01).
+        - Test Coverage ( project-02: build.sh)
+            - "cargo install cargo-tarpaulin --registry crates-io" installed tarpaulin code coverage tool.
+            - "cargo tarpaulin" indicated in the build.sh file runs coverage. 
+            - NOTE: if the program has some failing test functions, tarpaulin sometimes may not be able to determine he coverage.
+        - Integration tests (project-03)
+            - tests codes resides in the "tests" directory, other than "src" directory.
+        - Fuzz Tests (project-04)
+        - Test Code Generation  
+    - [ Logs ](./01.base-logs)
+        - Log4rs (project-01)
+        - Log usage templates 
+        - log redirection to LogServer 
+        - Probe placement strategies
+2. Web
     - Wasm 
     - WebGL
     - Rocket web framework
-5. Data Science
+3. Data Science
     - Array slicing 
     - Aerospike usage and modules
     - Redis usage and udf 
-6. Network 
-    - Tokio and GRPC 
-    - secure connection and encrypt/decrypt 
-7. AI
+4. AI
     - Simple machine learning examples
     - Burn 
     - Trochrs
-9. Architecture/Design Templates
-    - Compiletime API and Runtime Service Architecture
-    - Design pattern 
-    - Using Common Enumeration With Other Languages
 

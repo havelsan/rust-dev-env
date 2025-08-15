@@ -1,0 +1,10 @@
+[package]
+name = "project-01"
+version = "0.1.0"
+edition = "2024"
+publish = ["cargo-prod","cargo-test"]
+license = "GPL"
+description = "PROJECT-01"
+[dependencies]
+tokio="*"
+
