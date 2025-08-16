@@ -74,8 +74,16 @@ The reference projects in the below list focuses only on a specific subject with
         - Integration tests (project-03)
             - Cargo looks for integration tests in tests directory next to src.
             - tests codes resides in the "tests" directory, other than "src" directory.
-        - Fuzz Tests (project-04)
-        - Test Code Generation  
+        - Test Case (project-04)
+            - test_case crate provides procedural macro attribute that generates parametrized test instances.
+        - Mocking (project-05)
+            - The mockall crate allows creation of mock objects based on functionality declared with traits 
+        - Fuzz Testing
+            - The goal of fuzzing is to crash a program with varying input that developers and testers may not have considered when writing tests.
+            - https://zerotomastery.io/blog/complete-guide-to-testing-code-in-rust
+            - "cargo install cargo-afl --registry crates-io" installs cargo subcommand, but also we have "alf" dependency in the Cargo.toml file.
+            - build.sh builds and starts the fuzz testing according to samples in "fuzz_samples".
+            - You may have error while executing build.sh, you may nees to execute "cargo afl configure" or simiar command , and you may have to give your password (and have sudo access).
     - [ Logs ](./01.base-logs)
         - Log4rs (project-01)
         - Log usage templates 
