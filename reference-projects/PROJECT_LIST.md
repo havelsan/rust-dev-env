@@ -89,6 +89,8 @@ The reference projects in the below list focuses only on a specific subject with
         - You may check the service "systemctl | grep syslog"
         - Logging text can be viewed in the file : /var/log/syslog (for logger in project-01 , 'grep HELLO /var/log/syslog' command filters the given text)
         - Later on linux's syslog service may be configured to forward all logs to another server, rotate the logs or ignore some of them.
+    - [ Validation ](./01.base-validation)
+        - "garde" crate enables us to easily validate the given values. (project-01)
 2. Web
     - Wasm 
     - WebGL
