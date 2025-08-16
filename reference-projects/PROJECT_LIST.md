@@ -2,7 +2,7 @@
 The reference projects in the below list focuses only on a specific subject with minimal code.
 
 1. Base
-    - [ Rust Documents ](../rust/share/doc/)
+    - [ Rust Documents ](../rust/share/doc/). This link will be active locally, after installing rust (Will not show up in github)
     - We use Cargo.toml file in a project directory to build and configure the project.
     - [ Debugging a project (gdb command is written in the build.sh) ](./01.base-debug)
          - "cargo build --release" clears debug information from the binary, if you want to debug a binary, you should build it only with "cargo build".
