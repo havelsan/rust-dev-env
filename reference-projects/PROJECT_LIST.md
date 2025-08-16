@@ -84,9 +84,10 @@ The reference projects in the below list focuses only on a specific subject with
             - "cargo install cargo-afl --registry crates-io" installs cargo subcommand, but also we have "alf" dependency in the Cargo.toml file.
             - build.sh builds and starts the fuzz testing according to samples in "fuzz_samples".
             - You may have error while executing build.sh, you may nees to execute "cargo afl configure" or simiar command , and you may have to give your password (and have sudo access).
-    - [ Logs ](./01.base-logs)
+    - [ Logs ](./01.base-logging)
         - syslog crate will be used to forward all logs to local sysog service on linux (rsyslog). (project-01)
         - You may check the service "systemctl | grep syslog"
+        - Logging text can be viewed in the file : /var/log/syslog (for logger in project-01 , 'grep HELLO /var/log/syslog' command filters the given text)
         - Later on linux's syslog service may be configured to forward all logs to another server, rotate the logs or ignore some of them.
 2. Web
     - Wasm 
