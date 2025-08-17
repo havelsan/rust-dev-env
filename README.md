@@ -1,7 +1,9 @@
 # Rust Development Environment
 This repository contains rust development environment preparation scripts, documentation, reference projects containing codes and principles.
 
-NOTE: To use rust-dev-env properly, please source the release file found in rust-ev-env main directory.
+**NOTE-1: To use rust-dev-env properly, please source the release file found in rust-ev-env main directory.
+NOTE-2: Run install scripts, make configurations in the devops/README.md file and run projects in the “reference-projects” directory before archiving the “rust-dev-env” directory. Archived directory may be extracted to another offline machine.  
+**
 
 ## How to use this repository
 
