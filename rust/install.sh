@@ -22,3 +22,7 @@ d=$(ls *.tar.xz | sed -e 's/.tar.xz//')
 
 rm -Rf $d *.tar.xz
 
+#mkdir -p cargo_home
+#cd cargo_home
+#git clone https://github.com/rust-lang/crates.io-index
+
