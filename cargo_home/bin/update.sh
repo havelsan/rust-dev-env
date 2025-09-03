@@ -18,9 +18,11 @@ fi
 
 rm -Rf $CARGO_HOME/work
 mkdir -p $CARGO_HOME/work
-cp $1 $CARGO_HOME/work/Cargo.toml
 cd $CARGO_HOME/work
 cargo init
+cd -
+cp $1 $CARGO_HOME/work/Cargo.toml
+cd $CARGO_HOME/work
 cargo fetch 
 
 

@@ -10,12 +10,6 @@ then
    exit 1
 fi
 
-if [ $# -lt 1 ]
-then
-        echo "Usage : $0 <cargo_toml_file>"
-        exit 1
-fi
-
 $CARGO_HOME/bin/update.sh $CARGO_HOME/etc/initial.Cargo.toml
 
 
