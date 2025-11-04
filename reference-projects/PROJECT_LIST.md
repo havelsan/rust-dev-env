@@ -91,16 +91,15 @@ The reference projects in the below list focuses only on a specific subject with
         - Later on linux's syslog service may be configured to forward all logs to another server, rotate the logs or ignore some of them.
     - [ Validation ](./01.base-validation)
         - "garde" crate enables us to easily validate the given values. (project-01)
-2. Web
-    - Wasm 
-    - WebGL
-    - Rocket web framework
+2. AI
+    - Burn 
+    - Simple machine learning examples
+    - Trochrs
 3. Data Science
     - Array slicing 
     - Aerospike usage and modules
     - Redis usage and udf 
-4. AI
-    - Simple machine learning examples
-    - Burn 
-    - Trochrs
-
+4. Web
+    - Wasm 
+    - WebGL
+    - Rocket web framework
