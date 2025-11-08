@@ -36,7 +36,7 @@ The reference projects in the below list focuses only on a specific subject with
         - Credentials are stored in $CARGO_HOME/credentials.toml , but registry/repository urls are stored in $CARGO_HOME/config.toml file. This is explained in the [devops](../devops) section.
         - NOTE: there is no way to override the variables in Cargo.toml using config.toml files. You should replace the key in Cargo.toml file using a linux command before executing it.
         - **We intentionally created project-01/.cargo/config.toml file and set the rustc variable as "rustc1" to let you know we can compile with another compiler per project.**
-    - [Rust Library Project](./01.base-rust_lib)
+    - [Rust Library Project](./01.base-rust_grpc_lib)
         - We will use [GRPC](https://github.com/hyperium/tonic/tree/master/examples) as a communication layer.
         - project-01 (LIB) : The project is api interface project that supplies the api to reach the related service.
             - "cargo new service_api_01 --lib" command creates service_api_01 directory with Cargo.toml and src/lib.rs example files inside.
