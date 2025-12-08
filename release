@@ -1,5 +1,7 @@
 #!/bin/bash
 
+CURRENT_DIR=$(pwd)
+
 export RUST_DEV_ENV=`cd \`dirname $( readlink -f $BASH_SOURCE ) \` && pwd`
 
 cd $RUST_DEV_ENV
@@ -11,3 +13,6 @@ do
       source $i/release 
    fi
 done
+
+cd $CURRENT_DIR
+
