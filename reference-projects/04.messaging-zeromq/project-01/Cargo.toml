@@ -1,0 +1,9 @@
+[package]
+name = "project-01"
+version = "0.1.2"
+edition = "2024"
+publish = ["cargo-prod","cargo-test"]
+
+[dependencies]
+zmq="*"
+
