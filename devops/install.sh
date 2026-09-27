@@ -15,7 +15,7 @@ fi
 
 
 wget --no-check-certificate https://dl.gitea.com/gitea/
-GITEA_VERSION=$(grep 'href="/gitea/' index.html | head -1| sed -e 's#.*href="/gitea/##'| sed -e 's#/.*##' | sed -e 's#".*##')
+GITEA_VERSION=$(grep 'href="/gitea/[0-9]' index.html | grep -v nightly | head -1| sed -e 's#.*href="/gitea/##'| sed -e 's#/.*##' | sed -e 's#".*##')
 rm -f index.html*
 
 GITEA_OS_ARCH=linux-amd64
