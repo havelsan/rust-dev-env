@@ -81,7 +81,7 @@ rm -Rf $CARGO_HOME/*
 - Click on the "Applications" link on the left menu.
   + Token Name = token1
   + Repository and Organization Access = All
-  + Select Permissions = Package = "Read and Write", Reposiroty="Read nd Write", the rest is "No Access".
+  + Select Permissions = Issue = "Read and Write", Package = "Read and Write", Reposiroty="Read nd Write", the rest is "No Access".
   + Click on the "Generate Token" button.
   + When you click on the "Generate Token" button, there will appear a token key on the top of the page with blue background. 
   + CAUTION : Save this key to a file. ( Example key : 17e5616bf481c9f46350312ba533edfc8d383806).
