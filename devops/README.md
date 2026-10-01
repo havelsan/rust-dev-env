@@ -390,6 +390,10 @@ grep ^Package: /var/lib/apt/lists/localhost:13000_api_packages_deb-test_debian_d
   curl --user adm001:401e7c68f09e4e10ad483ba97a50c84086eedb25 -X DELETE http://localhost:13000/api/packages/deb-test/debian/pool/TARGET_PLATFORM_GROUP-TARGET_PLATFORM-1.0.0/main/testpkg/1.0.0-1/amd64
 ```
 
+## Install Gitea MCP Server
+
+MCP Server of gitea is installed at the end of the install.sh . It will automatically started in run_gitea.sh script.
+
 
 ## NOTES :
 Configuration Hierarchy:

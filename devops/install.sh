@@ -53,6 +53,11 @@ mv download*.sh bin/
 mv import*.sh bin/
 
 
+git clone https://gitea.com/gitea/gitea-mcp.git
+cd gitea-mcp
+make build
+cp gitea-mcp ../bin
+
 
 
 
